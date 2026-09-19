@@ -1021,9 +1021,10 @@ async function api(req, res, pathname, url, body) {
         'Formulalarni oddiy matnda ber. Zarur bo\'lsa 1-2 misol keltir. ' +
         'Dars va ta\'limga aloqasi yo\'q mavzularda muloyim rad et. Markdown belgilarini ishlatma.';
       let answer;
-      try { answer = await askAI(sys, (ctx ? ctx + '\n\n' : '') + 'O\'quvchi: ' + text); }
-      catch (e) { return json(res, 502, { error: e.code || 'ai_error' }); }
-
+       
+    try { answer = await askAI(sys, (ctx ? ctx + '\n\n' : '') + 'O\'quvchi: ' + text); }
+catch (e) { console.error('AI XATO:', e.message, e.code); return json(res, 502, { error: e.code || 'ai_error' }); }
+       
       hist.push({ role: 'me', text, at: now() });
       hist.push({ role: 'ai', text: clean(answer, 4000), at: now() });
       if (hist.length > 40) hist.splice(0, hist.length - 40);
