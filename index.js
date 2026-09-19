@@ -1323,6 +1323,23 @@ server.listen(PORT, () => {
     ? `🧠 AI: ${AI_PROVIDER} (${AI_PROVIDER === 'openai' ? OPENAI_MODEL : GEMINI_MODEL})`
     : '⚠️  AI kaliti yo\'q — GEMINI_API_KEY yoki OPENAI_API_KEY qo\'ying.');
   console.log('🌤  Ob-havo: Open-Meteo · 💱 Kurs: cbu.uz (kalit kerak emas)');
+
+   // VAQTINCHALIK TEST
+  setTimeout(async () => {
+    try {
+      const key = process.env.GEMINI_API_KEY || '';
+      console.log('🔑 Key:', key ? key.slice(0,8)+'...' : 'YOQ!');
+      const r = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key='+key, {
+        method:'POST',
+        headers:{'content-type':'application/json'},
+        body: JSON.stringify({contents:[{role:'user',parts:[{text:'salom'}]}]})
+      });
+      const t = await r.text();
+      console.log('🧪 Gemini test:', r.status, t.slice(0,200));
+    } catch(e) {
+      console.log('🧪 Gemini test XATO:', e.message);
+    }
+  }, 3000);
 });
 
 /* -------------------------------- BOT ------------------------------------- */
