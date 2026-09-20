@@ -326,7 +326,6 @@ async function askAI(system, user, wantJson) {
     headers: {
       'content-type': 'application/json',
       'x-goog-api-key': GEMINI_KEY,
-      'Api-Revision': '2026-05-20',
     },
     body: JSON.stringify(payload),
   }, 60000);
