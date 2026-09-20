@@ -314,24 +314,34 @@ async function askAI(system, user, wantJson) {
     return (j.choices && j.choices[0] && j.choices[0].message.content) || '';
   }
 
+  // ✅ YANGI: AQ... kalitlar uchun /v1beta/interactions endpoint
+  const fullPrompt = system + '\n\n' + user;
   const payload = {
-    systemInstruction: { parts: [{ text: system }] },
-    contents: [{ role: 'user', parts: [{ text: user }] }],
-    generationConfig: {
-      temperature: wantJson ? 0.2 : 0.75,
-      maxOutputTokens: 2600,
-    },
+    model: GEMINI_MODEL,
+    input: fullPrompt,
   };
-  const url = GEMINI_BASE + '/v1beta/models/' +
-    encodeURIComponent(GEMINI_MODEL) + ':generateContent';
+  const url = GEMINI_BASE + '/v1beta/interactions';
   const j = await getJson(url, {
     method: 'POST',
-    headers: { 'content-type': 'application/json', 'x-goog-api-key': GEMINI_KEY },
+    headers: {
+      'content-type': 'application/json',
+      'x-goog-api-key': GEMINI_KEY,
+      'Api-Revision': '2026-05-20',
+    },
     body: JSON.stringify(payload),
   }, 60000);
-  const c = j.candidates && j.candidates[0];
-  if (!c) { const e = new Error('ai_empty'); e.code = 'ai_empty'; throw e; }
-  return ((c.content && c.content.parts) || []).map((p) => p.text || '').join('');
+
+  // Javobni ajratib olish
+  const steps = (j.steps || []);
+  const modelStep = steps.find(s => s.type === 'model_output' || s.modelOutput);
+  if (!modelStep) {
+    const e = new Error('ai_empty'); e.code = 'ai_empty'; throw e;
+  }
+  const contents = modelStep.content || (modelStep.modelOutput && modelStep.modelOutput.content) || [];
+  return contents
+    .filter(c => c.type === 'text' || c.text)
+    .map(c => c.text && typeof c.text === 'object' ? c.text.text : c.text)
+    .join('');
 }
 
 /* Javobdan JSON ajratib olish (model ba'zan ```json ... ``` qaytaradi) */
