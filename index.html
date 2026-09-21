@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-<title>To'garakga qatnashmaysizmi</title>
+<title>To'garakga qatnashmaysizmi ?</title>
 <style>
 /* ===================== TOKENLAR ===================== */
 :root{
@@ -173,103 +173,6 @@ textarea{resize:vertical;min-height:88px;line-height:1.5}
 .stat b{display:block;font-size:20px}
 .stat span{font-size:11px;color:var(--muted)}
 .loader{padding:34px;text-align:center;color:var(--muted);font-size:13px}
-
-/* ===================== YANGI: AI / QUIZ / WIDGET ===================== */
-.scroll-x{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
-.scroll-x::-webkit-scrollbar{display:none}
-.scroll-x>*{flex:none}
-
-/* ob-havo + valyuta */
-.wx{display:flex;gap:12px;align-items:center;border-radius:var(--r);padding:13px 14px;color:#fff;
-  background:linear-gradient(135deg,#1E6EE0,#6D46F5 85%)}
-.wx .ic{font-size:33px;line-height:1}
-.wx b{font-size:25px;font-weight:800;letter-spacing:-.03em}
-.wx .sm{font-size:11.5px;opacity:.85}
-.wxd{display:flex;gap:6px;margin-top:10px}
-.wxd div{flex:1;text-align:center;background:rgba(255,255,255,.14);border-radius:10px;padding:6px 2px;font-size:11px}
-.wxd b{display:block;font-size:12.5px;font-weight:700}
-.rate{border:1px solid var(--line);background:var(--card2);border-radius:12px;padding:8px 12px;min-width:104px}
-.rate b{display:block;font-size:15px;font-weight:700}
-.rate span{font-size:11px;color:var(--muted)}
-.up{color:var(--green)} .down{color:var(--red)}
-
-/* hub kartalari */
-.hub{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.hub a{display:block;border:1px solid var(--line);background:var(--card);border-radius:15px;padding:14px;
-  cursor:pointer;color:var(--txt);position:relative;overflow:hidden}
-.hub a .em{font-size:25px;display:block;margin-bottom:7px}
-.hub a b{font-size:14px;display:block}
-.hub a small{color:var(--muted);font-size:11.5px;line-height:1.35;display:block;margin-top:3px}
-.hub a::after{content:"";position:absolute;right:-20px;top:-20px;width:54px;height:54px;border-radius:50%;
-  background:var(--tc,var(--violet));opacity:.15}
-.hub a.wide2{grid-column:span 2}
-
-/* halqa (foiz) */
-.ring{width:132px;height:132px;margin:0 auto;position:relative;display:grid;place-items:center}
-.ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
-.ring .n{font-size:31px;font-weight:800;letter-spacing:-.03em}
-.ring .n small{font-size:14px;font-weight:600}
-.bars{display:flex;flex-direction:column;gap:9px}
-.bar b{font-size:12.5px;font-weight:600}
-.bar .t{display:flex;justify-content:space-between;margin-bottom:4px;font-size:12.5px}
-.bar .r{height:7px;border-radius:4px;background:var(--card2);overflow:hidden}
-.bar .r i{display:block;height:100%;border-radius:4px;background:var(--accent);transition:width .5s ease}
-
-/* ro'yxatlar (to'g'ri / xato / yetishmagan) */
-.pts{display:flex;flex-direction:column;gap:7px;margin-top:9px}
-.pts li{list-style:none;display:flex;gap:8px;font-size:13.5px;line-height:1.4}
-.pts li .mk{flex:none;font-size:13px;margin-top:1px}
-ul.pts{padding:0;margin:9px 0 0}
-.fx{background:var(--card2);border-radius:10px;padding:9px 11px;font-size:13px}
-.fx s{color:var(--red);text-decoration:line-through;opacity:.8}
-.fx em{color:var(--green);font-style:normal;font-weight:600}
-
-/* formula qutisi */
-.fml{background:var(--card2);border:1px solid var(--line);border-radius:11px;padding:10px 12px;margin-top:7px}
-.fml code{display:block;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:14.5px;color:var(--blue);
-  margin:3px 0;word-break:break-word}
-.fml b{font-size:12.5px} .fml small{color:var(--muted);font-size:11.5px}
-
-/* viktorina */
-.qz{display:flex;flex-direction:column;gap:9px;margin-top:12px}
-.qz button{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:13px;
-  padding:13px 14px;font-size:14.5px;cursor:pointer;display:flex;gap:10px;align-items:center;line-height:1.35}
-.qz button .k{width:25px;height:25px;border-radius:8px;background:var(--card2);flex:none;
-  display:grid;place-items:center;font-size:12px;font-weight:700;color:var(--muted)}
-.qz button.on{border-color:var(--accent)} .qz button.on .k{background:var(--accent);color:#fff}
-.qz button.ok{border-color:var(--green);background:color-mix(in srgb,var(--green) 12%,var(--card))}
-.qz button.ok .k{background:var(--green-d);color:#fff}
-.qz button.no{border-color:var(--red);background:color-mix(in srgb,var(--red) 11%,var(--card))}
-.qz button.no .k{background:var(--red);color:#fff}
-.qz button[disabled]{pointer-events:none;opacity:1}
-.prog{display:flex;gap:4px;margin-bottom:4px}
-.prog i{height:4px;flex:1;border-radius:2px;background:var(--line)}
-.prog i.on{background:var(--accent)} .prog i.ok{background:var(--green)} .prog i.no{background:var(--red)}
-
-/* peshqadamlar */
-.lb{display:flex;align-items:center;gap:11px;padding:10px 12px;border:1px solid var(--line);
-  background:var(--card);border-radius:13px}
-.lb.me{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--card))}
-.lb .pl{width:29px;text-align:center;font-weight:800;font-size:15px;color:var(--muted);flex:none}
-.lb.g1 .pl{color:#FFD35C} .lb.g2 .pl{color:#C8D2E4} .lb.g3 .pl{color:#E0996A}
-.lb .pts2{text-align:right;flex:none} .lb .pts2 b{display:block;font-size:15px}
-.lb .pts2 span{font-size:10.5px;color:var(--muted)}
-
-/* AI matni */
-.md{font-size:14.5px;line-height:1.55;white-space:pre-wrap;word-break:break-word}
-.bubble.ai{align-self:flex-start;background:var(--card);border:1px solid var(--line);
-  border-bottom-left-radius:5px;max-width:92%}
-.dots i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--muted);margin:0 2px;
-  animation:bl 1.2s infinite}
-.dots i:nth-child(2){animation-delay:.2s} .dots i:nth-child(3){animation-delay:.4s}
-@keyframes bl{0%,60%,100%{opacity:.25}30%{opacity:1}}
-
-/* ovozli kiritish */
-.mic{width:44px;height:44px;border-radius:14px;border:1px solid var(--line);background:var(--card2);
-  display:grid;place-items:center;font-size:19px;cursor:pointer;flex:none}
-.mic.rec{background:var(--red);border-color:transparent;animation:pulse 1.1s infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,92,110,.55)}70%{box-shadow:0 0 0 11px rgba(255,92,110,0)}}
-.tabs.six .tab{font-size:9px} .tabs.six .tab i{font-size:16px}
 </style>
 </head>
 <body>
@@ -486,130 +389,6 @@ en:{app:"Join a study club",sub:"Clubs and mentors",next:"Continue",back:"Back",
  dayShort:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]}
 };
 
-/* ---------- YANGI FUNKSIYALAR UCHUN SO'ZLAR ---------- */
-const EXTRA = {
-uz:{ai:"AI",aiHub:"AI yordamchi",
- study:"Mavzu tahlili",studyD:"Bilganingizni ayting — AI baholab beradi",
- aiChat:"AI suhbat",aiChatD:"Istalgan dars savolini bering",
- quiz:"Viktorina",quizD:"Test yechib ochko to'plang",
- board:"Peshqadamlar",boardD:"Eng ko'p ochko to'plaganlar",
- mystat:"Statistikam",mystatD:"O'sishingizni kuzating",
- topicPh:"Mavzu nomini yozing…",findTopic:"Topish",popular:"Mashhur mavzular",
- preparing:"AI mavzuni tayyorlamoqda…",keyPoints:"Asosiy nuqtalar",formulas:"Formulalar",
- terms:"Atamalar",qs:"Sizga savollar",summary:"Qisqacha",
- answerTitle:"Endi siz gapiring",answerHint:"Yozing yoki mikrofon orqali aytib bering",
- answerPh:"Mavzu haqida bilganingizni yozing: ta'riflar, formulalar, misollar…",
- check:"Tahlil qilish",analyzing:"Javobingiz tahlil qilinmoqda…",
- similarity:"O'xshashlik",gotRight:"To'g'ri aytdingiz",forgot:"Esdan chiqqan",
- mistakes:"Xatolar",missedF:"Aytilmagan formulalar",advice:"Tavsiya",
- concept:"Tushuncha",fmlS:"Formulalar",trmS:"Atamalar",fullness:"To'liqlik",
- tryAgain:"Qayta javob berish",newTopic:"Boshqa mavzu",words:"so'z",
- aiPh:"Savolingizni yozing…",aiHello:"Salom! Men o'quv yordamchingizman. Istalgan fandan savol bering — tushuntirib beraman.",
- clearChat:"Suhbatni tozalash",thinking:"O'ylayapman",
- level:"Daraja",easy:"Oson",mid:"O'rta",hard:"Qiyin",count:"Savollar",
- startQuiz:"Boshlash",building:"Savollar tayyorlanmoqda…",question:"Savol",
- finishQuiz:"Yakunlash",yourScore:"Natijangiz",pts:"ochko",rightA:"to'g'ri",
- again:"Yana o'ynash",toBoard:"Peshqadamlarga",
- weekly:"Hafta",allTime:"Umumiy",accuracy:"aniqlik",games:"o'yin",noBoard:"Hali natija yo'q",
- weather:"Ob-havo",rates:"Valyuta kursi",feels:"his",humid:"namlik",wind:"shamol",
- gchat:"Guruh chati",gchatPh:"Guruhga yozing…",openChat:"Guruh chati",notMember:"Siz bu guruh a'zosi emassiz",
- aiOff:"AI hozircha ulanmagan",aiLimit:"Soatlik limit tugadi, keyinroq urinib ko'ring",
- noStats:"Hali mavzu tahlil qilmagansiz",avgS:"o'rtacha",bestS:"eng yuqori",tries:"urinish",
- lastTries:"Oxirgi urinishlar",bySubject:"Fanlar bo'yicha",noVoice:"Brauzer ovozli kiritishni qo'llamaydi",
- listening:"Tinglanmoqda…",shortAns:"Javob juda qisqa"},
-
-cyr:{ai:"AI",aiHub:"AI ёрдамчи",
- study:"Мавзу таҳлили",studyD:"Билганингизни айтинг — AI баҳолаб беради",
- aiChat:"AI суҳбат",aiChatD:"Исталган дарс саволини беринг",
- quiz:"Викторина",quizD:"Тест ечиб очко тўпланг",
- board:"Пешқадамлар",boardD:"Энг кўп очко тўплаганлар",
- mystat:"Статистикам",mystatD:"Ўсишингизни кузатинг",
- topicPh:"Мавзу номини ёзинг…",findTopic:"Топиш",popular:"Машҳур мавзулар",
- preparing:"AI мавзуни тайёрламоқда…",keyPoints:"Асосий нуқталар",formulas:"Формулалар",
- terms:"Атамалар",qs:"Сизга саволлар",summary:"Қисқача",
- answerTitle:"Энди сиз гапиринг",answerHint:"Ёзинг ёки микрофон орқали айтиб беринг",
- answerPh:"Мавзу ҳақида билганингизни ёзинг: таърифлар, формулалар, мисоллар…",
- check:"Таҳлил қилиш",analyzing:"Жавобингиз таҳлил қилинмоқда…",
- similarity:"Ўхшашлик",gotRight:"Тўғри айтдингиз",forgot:"Эсдан чиққан",
- mistakes:"Хатолар",missedF:"Айтилмаган формулалар",advice:"Тавсия",
- concept:"Тушунча",fmlS:"Формулалар",trmS:"Атамалар",fullness:"Тўлиқлик",
- tryAgain:"Қайта жавоб бериш",newTopic:"Бошқа мавзу",words:"сўз",
- aiPh:"Саволингизни ёзинг…",aiHello:"Салом! Мен ўқув ёрдамчингизман. Исталган фандан савол беринг.",
- clearChat:"Суҳбатни тозалаш",thinking:"Ўйлаяпман",
- level:"Даража",easy:"Осон",mid:"Ўрта",hard:"Қийин",count:"Саволлар",
- startQuiz:"Бошлаш",building:"Саволлар тайёрланмоқда…",question:"Савол",
- finishQuiz:"Якунлаш",yourScore:"Натижангиз",pts:"очко",rightA:"тўғри",
- again:"Яна ўйнаш",toBoard:"Пешқадамларга",
- weekly:"Ҳафта",allTime:"Умумий",accuracy:"аниқлик",games:"ўйин",noBoard:"Ҳали натижа йўқ",
- weather:"Об-ҳаво",rates:"Валюта курси",feels:"ҳис",humid:"намлик",wind:"шамол",
- gchat:"Гуруҳ чати",gchatPh:"Гуруҳга ёзинг…",openChat:"Гуруҳ чати",notMember:"Сиз бу гуруҳ аъзоси эмассиз",
- aiOff:"AI ҳозирча уланмаган",aiLimit:"Соатлик лимит тугади, кейинроқ уриниб кўринг",
- noStats:"Ҳали мавзу таҳлил қилмагансиз",avgS:"ўртача",bestS:"энг юқори",tries:"уриниш",
- lastTries:"Охирги уринишлар",bySubject:"Фанлар бўйича",noVoice:"Браузер овозли киритишни қўлламайди",
- listening:"Тингланмоқда…",shortAns:"Жавоб жуда қисқа"},
-
-ru:{ai:"AI",aiHub:"AI помощник",
- study:"Разбор темы",studyD:"Расскажите, что знаете — AI оценит",
- aiChat:"AI чат",aiChatD:"Задайте любой учебный вопрос",
- quiz:"Викторина",quizD:"Решайте тесты и набирайте очки",
- board:"Лидеры",boardD:"Кто набрал больше очков",
- mystat:"Моя статистика",mystatD:"Следите за прогрессом",
- topicPh:"Введите название темы…",findTopic:"Найти",popular:"Популярные темы",
- preparing:"AI готовит тему…",keyPoints:"Ключевые моменты",formulas:"Формулы",
- terms:"Термины",qs:"Вопросы для вас",summary:"Кратко",
- answerTitle:"Теперь ваша очередь",answerHint:"Напишите или продиктуйте голосом",
- answerPh:"Напишите всё, что знаете: определения, формулы, примеры…",
- check:"Проанализировать",analyzing:"Анализируем ваш ответ…",
- similarity:"Совпадение",gotRight:"Верно сказали",forgot:"Забыли",
- mistakes:"Ошибки",missedF:"Не названные формулы",advice:"Рекомендация",
- concept:"Понимание",fmlS:"Формулы",trmS:"Термины",fullness:"Полнота",
- tryAgain:"Ответить заново",newTopic:"Другая тема",words:"слов",
- aiPh:"Напишите вопрос…",aiHello:"Привет! Я учебный помощник. Задайте вопрос по любому предмету.",
- clearChat:"Очистить чат",thinking:"Думаю",
- level:"Уровень",easy:"Лёгкий",mid:"Средний",hard:"Сложный",count:"Вопросов",
- startQuiz:"Начать",building:"Готовим вопросы…",question:"Вопрос",
- finishQuiz:"Завершить",yourScore:"Ваш результат",pts:"очков",rightA:"верно",
- again:"Ещё раз",toBoard:"К лидерам",
- weekly:"Неделя",allTime:"Всё время",accuracy:"точность",games:"игр",noBoard:"Результатов пока нет",
- weather:"Погода",rates:"Курс валют",feels:"ощущается",humid:"влажность",wind:"ветер",
- gchat:"Чат группы",gchatPh:"Написать в группу…",openChat:"Чат группы",notMember:"Вы не состоите в группе",
- aiOff:"AI пока не подключён",aiLimit:"Лимит на час исчерпан, попробуйте позже",
- noStats:"Вы ещё не разбирали темы",avgS:"средний",bestS:"лучший",tries:"попыток",
- lastTries:"Последние попытки",bySubject:"По предметам",noVoice:"Браузер не поддерживает голосовой ввод",
- listening:"Слушаю…",shortAns:"Ответ слишком короткий"},
-
-en:{ai:"AI",aiHub:"AI assistant",
- study:"Topic review",studyD:"Tell what you know — AI grades it",
- aiChat:"AI chat",aiChatD:"Ask any study question",
- quiz:"Quiz",quizD:"Answer questions, earn points",
- board:"Leaderboard",boardD:"Top scorers",
- mystat:"My stats",mystatD:"Track your progress",
- topicPh:"Type a topic name…",findTopic:"Find",popular:"Popular topics",
- preparing:"AI is preparing the topic…",keyPoints:"Key points",formulas:"Formulas",
- terms:"Terms",qs:"Questions for you",summary:"Summary",
- answerTitle:"Now it's your turn",answerHint:"Type it or dictate with the mic",
- answerPh:"Write everything you know: definitions, formulas, examples…",
- check:"Analyse",analyzing:"Analysing your answer…",
- similarity:"Match",gotRight:"You got right",forgot:"You missed",
- mistakes:"Mistakes",missedF:"Formulas not mentioned",advice:"Advice",
- concept:"Understanding",fmlS:"Formulas",trmS:"Terms",fullness:"Completeness",
- tryAgain:"Answer again",newTopic:"Another topic",words:"words",
- aiPh:"Type your question…",aiHello:"Hi! I'm your study assistant. Ask me about any subject.",
- clearChat:"Clear chat",thinking:"Thinking",
- level:"Level",easy:"Easy",mid:"Medium",hard:"Hard",count:"Questions",
- startQuiz:"Start",building:"Building questions…",question:"Question",
- finishQuiz:"Finish",yourScore:"Your score",pts:"points",rightA:"correct",
- again:"Play again",toBoard:"Leaderboard",
- weekly:"Week",allTime:"All time",accuracy:"accuracy",games:"games",noBoard:"No results yet",
- weather:"Weather",rates:"Exchange rates",feels:"feels",humid:"humidity",wind:"wind",
- gchat:"Group chat",gchatPh:"Message the group…",openChat:"Group chat",notMember:"You're not in this group",
- aiOff:"AI isn't connected yet",aiLimit:"Hourly limit reached, try later",
- noStats:"You haven't reviewed any topic yet",avgS:"average",bestS:"best",tries:"attempts",
- lastTries:"Recent attempts",bySubject:"By subject",noVoice:"This browser has no voice input",
- listening:"Listening…",shortAns:"Answer is too short"}
-};
-for (const k in EXTRA) Object.assign(I18N[k], EXTRA[k]);
-
 /* ========================== HOLAT ========================== */
 const tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
 const LS = window.localStorage;
@@ -619,19 +398,7 @@ const S = {
   me: null, screen: "search", subject: "", q: "", status: "all",
   mentors: [], mentor: null, groups: [], requests: [], threads: [],
   chat: null, messages: [], edit: null, adminToken: LS.getItem("adm") || "", adminData: null,
-  history: [], timer: null,
-  /* --- yangi --- */
-  info: null,                                    // ob-havo + valyuta
-  stSubject: LS.getItem("stsub") || "",          // mavzu tahlili: fan
-  stQuery: "", stHints: [], topic: null,         // mavzu
-  stAnswer: "", stResult: null, stBusy: false,
-  aiMsgs: [], aiBusy: false,                     // AI suhbat
-  qz: null,                                      // viktorina sessiyasi
-  qzSetup: { subject: "", level: "mid", count: 5 },
-  qzResult: null, qzBusy: false,
-  board: null, boardPeriod: "all", boardSubject: "",
-  stats: null,
-  gchat: null, gwho: {}, gmsgs: []               // guruh chati
+  history: [], timer: null
 };
 let T = I18N[S.lang];
 const $ = (s, r) => (r || document).querySelector(s);
@@ -688,37 +455,26 @@ function setLang(l) {
 }
 
 /* ========================== NAVIGATSIYA ========================== */
-const NEEDS_BACK = { mentor: 1, chat: 1, admin: 1, study: 1, topic: 1, result: 1,
-  aichat: 1, quiz: 1, board: 1, mystat: 1, gchat: 1 };
+const NEEDS_BACK = { mentor: 1, chat: 1, admin: 1 };
 
 async function go(screen, param) {
   if (!NEEDS_BACK[screen]) S.history = [];
   S.screen = screen; S.screenParam = param;
   clearInterval(S.timer); S.timer = null;
   try {
-    if (screen === "search") { await loadMentors(); loadInfo(); }
+    if (screen === "search") await loadMentors();
     if (screen === "groups") S.groups = (await api("/api/groups?mine=1")).groups;
     if (screen === "requests") S.requests = (await api("/api/requests")).requests;
     if (screen === "chats") S.threads = (await api("/api/threads")).threads;
     if (screen === "mentor") { const r = await api("/api/mentor/" + param); S.mentor = r.mentor; S.mentorGroups = r.groups; }
     if (screen === "chat") { await loadChat(param); S.timer = setInterval(() => loadChat(param, true), 4000); }
-    if (screen === "study") { S.stResult = null; if (S.stSubject) await loadHints(); }
-    if (screen === "aichat") { S.aiMsgs = (await api("/api/ai/chat")).messages || []; }
-    if (screen === "board") await loadBoard();
-    if (screen === "mystat") S.stats = await api("/api/ai/stats");
-    if (screen === "gchat") { await loadGChat(param); S.timer = setInterval(() => loadGChat(param, true), 5000); }
   } catch (e) { toast(errText(e)); }
   render();
   window.scrollTo(0, 0);
 }
-/* tarixni saqlab yangi ekranga o'tish */
-function nav(screen, param) { S.history.push({ s: S.screen, p: S.screenParam }); go(screen, param); }
-
 function errText(e) {
   const map = { mentor_age: T.mentorAgeErr, student_age: T.studentAgeErr, group_closed: T.closed,
-    group_full: T.full, blocked: T.blocked, bad_credentials: T.badCreds,
-    ai_off: T.aiOff, ai_limit: T.aiLimit, ai_error: T.error, ai_parse: T.error,
-    answer_short: T.shortAns, not_member: T.notMember };
+    group_full: T.full, blocked: T.blocked, bad_credentials: T.badCreds };
   return map[e && e.code] || T.error;
 }
 async function loadMentors() {
@@ -729,23 +485,6 @@ async function loadChat(peer, silent) {
   const r = await api("/api/messages?peer=" + encodeURIComponent(peer));
   S.chat = r.peer; S.messages = r.messages;
   if (silent) { renderChatBody(); }
-}
-async function loadInfo() {
-  if (S.info) return;
-  try { S.info = await api("/api/info"); if (S.screen === "search") renderInfo(); } catch (e) {}
-}
-async function loadHints() {
-  try { S.stHints = (await api("/api/ai/hints?subject=" + encodeURIComponent(S.stSubject))).hints || []; }
-  catch (e) { S.stHints = []; }
-}
-async function loadBoard() {
-  const p = new URLSearchParams({ period: S.boardPeriod, subject: S.boardSubject });
-  S.board = await api("/api/quiz/leaderboard?" + p);
-}
-async function loadGChat(id, silent) {
-  const r = await api("/api/group/messages?id=" + encodeURIComponent(id));
-  S.gchat = r.group; S.gwho = r.who; S.gmsgs = r.messages;
-  if (silent) renderGBody();
 }
 async function loadBadges() {
   try {
@@ -769,31 +508,21 @@ function render() {
   $("#btnBack").hidden = !NEEDS_BACK[S.screen];
   const v = $("#view");
   const R = { onboard: viewOnboard, search: viewSearch, mentor: viewMentor, groups: viewGroups,
-    requests: viewRequests, chats: viewChats, chat: viewChat, profile: viewProfile, admin: viewAdmin,
-    ai: viewAI, study: viewStudy, topic: viewTopic, result: viewResult, aichat: viewAiChat,
-    quiz: viewQuiz, board: viewBoard, mystat: viewStats, gchat: viewGChat };
+    requests: viewRequests, chats: viewChats, chat: viewChat, profile: viewProfile, admin: viewAdmin };
   v.innerHTML = (R[S.screen] || viewSearch)();
   renderTabs();
   if (S.screen === "chat") { const t = $("#thread"); if (t) t.scrollIntoView({ block: "end" }); }
-  if (S.screen === "aichat" || S.screen === "gchat") { const t = $("#thread"); if (t) t.scrollIntoView({ block: "end" }); }
-  if (S.screen === "result") drawRings();
 }
-/* AI ekranlari tab panelida qaysi tabni yoqadi */
-const TAB_OF = { ai: "ai", study: "ai", topic: "ai", result: "ai", aichat: "ai",
-  quiz: "ai", board: "ai", mystat: "ai", gchat: "groups", chat: "chats", mentor: "search" };
-
 function renderTabs() {
   const bar = $("#tabbar");
   if (!S.me || !S.me.role || S.screen === "onboard" || S.screen === "admin") { bar.hidden = true; return; }
   bar.hidden = false;
   const items = S.me.role === "mentor"
-    ? [["search","🔍",T.search],["groups","👥",T.groups],["requests","📨",T.requests],["ai","🧠",T.ai],["chats","💬",T.chats],["profile","👤",T.profile]]
-    : [["search","🔍",T.search],["groups","👥",T.groups],["ai","🧠",T.ai],["chats","💬",T.chats],["profile","👤",T.profile]];
-  const active = TAB_OF[S.screen] || S.screen;
-  $("#tabs").className = "tabs" + (items.length > 5 ? " six" : "");
+    ? [["search","🔍",T.search],["groups","👥",T.groups],["requests","📨",T.requests],["chats","💬",T.chats],["profile","👤",T.profile]]
+    : [["search","🔍",T.search],["groups","👥",T.groups],["chats","💬",T.chats],["profile","👤",T.profile]];
   $("#tabs").innerHTML = items.map(([id, ic, label]) => {
     const dot = (id === "requests" && S.pending) || (id === "chats" && S.unread) ? '<span class="dot"></span>' : "";
-    return '<button class="tab ' + (active === id ? "on" : "") + '" data-act="tab" data-val="' + id + '">' +
+    return '<button class="tab ' + (S.screen === id ? "on" : "") + '" data-act="tab" data-val="' + id + '">' +
       '<i>' + ic + '</i>' + dot + '<span>' + esc(label) + "</span></button>";
   }).join("");
 }
@@ -854,7 +583,7 @@ function tile(id, on, act) {
 function viewSearch() {
   const chips = [["all", T.all], ["open", T.open], ["closed", T.closed]].map(([v, l]) =>
     '<button class="chip ' + (S.status === v ? "on" : "") + '" data-act="status" data-val="' + v + '">' + esc(l) + "</button>").join("");
-  let head = '<div id="infoBox">' + infoBox() + "</div>" +
+  let head =
     '<input class="input" id="q" placeholder="' + esc(T.searchPh) + '" value="' + esc(S.q) + '">' +
     '<div class="chips">' + chips + "</div>";
   if (!S.subject) {
@@ -913,14 +642,12 @@ function viewMentor() {
 function groupCard(g, mine) {
   const col = SUB_COLOR[g.subject] || "#8B6BFF";
   let action = "";
-  const chatBtn = '<button class="btn go sm wide" style="margin-top:8px" data-act="g-chat" data-val="' +
-    g.id + '">💬 ' + esc(T.openChat) + "</button>";
   if (mine) {
     action = '<div class="two" style="margin-top:10px">' +
       '<button class="btn sm" data-act="edit-group" data-val="' + g.id + '">' + esc(T.edit) + "</button>" +
-      '<button class="btn sm danger" data-act="del-group" data-val="' + g.id + '">' + esc(T.del) + "</button></div>" + chatBtn;
+      '<button class="btn sm danger" data-act="del-group" data-val="' + g.id + '">' + esc(T.del) + "</button></div>";
   } else if (S.me && S.me.role === "student") {
-    if (g.joined) action = '<span class="badge open" style="margin-top:9px;display:inline-block">✓ ' + esc(T.joined) + "</span>" + chatBtn;
+    if (g.joined) action = '<span class="badge open" style="margin-top:9px;display:inline-block">✓ ' + esc(T.joined) + "</span>";
     else if (g.pending) action = '<span class="badge soft" style="margin-top:9px;display:inline-block">⏳ ' + esc(T.sent) + "</span>";
     else if (!g.open) action = '<span class="badge closed" style="margin-top:9px;display:inline-block">' + esc(T.closed) + "</span>";
     else if (g.members.length >= g.limit) action = '<span class="badge closed" style="margin-top:9px;display:inline-block">' + esc(T.full) + "</span>";
@@ -1061,372 +788,6 @@ function viewAdmin() {
       : '<p class="tiny muted">' + esc(T.noGroups) + "</p>") + "</div></div>";
 }
 
-/* ================== 9. OB-HAVO VA VALYUTA VIDJETI ================== */
-function infoBox() {
-  const i = S.info;
-  if (!i) return "";
-  let out = "";
-  if (i.weather) {
-    const w = i.weather;
-    out += '<div class="wx"><div class="ic">' + w.icon + "</div>" +
-      '<div style="flex:1;min-width:0"><b>' + w.temp + "°</b>" +
-      '<div class="sm">' + esc(w.city) + " · " + esc(w.text) + "</div>" +
-      '<div class="sm">' + esc(T.feels) + " " + w.feels + "° · " + esc(T.humid) + " " + w.humidity +
-      "% · " + esc(T.wind) + " " + w.wind + " km/h</div></div></div>";
-    if (w.days && w.days.length) {
-      out += '<div class="wxd">' + w.days.map(d =>
-        "<div>" + d.icon + "<b>" + d.max + "°</b>" + d.min + "°</div>").join("") + "</div>";
-    }
-  }
-  if (i.money && i.money.rates && i.money.rates.length) {
-    out += '<div class="scroll-x" style="margin-top:10px">' + i.money.rates.map(r => {
-      const cls = r.diff > 0 ? "up" : r.diff < 0 ? "down" : "muted";
-      const sign = r.diff > 0 ? "▲ +" : r.diff < 0 ? "▼ " : "— ";
-      return '<div class="rate"><b>' + esc(r.code) + "</b>" +
-        '<span style="display:block;font-size:13px;color:var(--txt)">' +
-        Math.round(r.rate).toLocaleString("ru-RU") + "</span>" +
-        '<span class="' + cls + '">' + (r.diff ? sign + Math.abs(Math.round(r.diff)) : "—") + "</span></div>";
-    }).join("") + "</div>";
-  }
-  return out;
-}
-function renderInfo() { const b = $("#infoBox"); if (b) b.innerHTML = infoBox(); }
-
-/* ==================== 10. AI BO'LIMI (HUB) ======================== */
-function viewAI() {
-  const card = (act, em, title, desc, col, wide) =>
-    '<a class="' + (wide ? "wide2" : "") + '" style="--tc:' + col + '" data-act="' + act + '">' +
-    '<span class="em">' + em + "</span><b>" + esc(title) + "</b><small>" + esc(desc) + "</small></a>";
-  return '<div class="section"><h2>' + esc(T.aiHub) + "</h2>" +
-    '<div class="hub">' +
-    card("go-study", "📖", T.study, T.studyD, "#8B6BFF", true) +
-    card("go-aichat", "🤖", T.aiChat, T.aiChatD, "#3E93FF") +
-    card("go-quiz", "🎮", T.quiz, T.quizD, "#22D07C") +
-    card("go-board", "🏆", T.board, T.boardD, "#FFB648") +
-    card("go-stats", "📊", T.mystat, T.mystatD, "#FF5C6E") +
-    "</div></div>";
-}
-
-/* ================ 11. MAVZU TAHLILI: QIDIRUV ====================== */
-function viewStudy() {
-  const subs = '<div class="grid">' + SUBJECTS.map(id =>
-    tile(id, S.stSubject === id, "st-subject")).join("") + "</div>";
-  const hints = S.stHints.length
-    ? "<h3>" + esc(T.popular) + '</h3><div class="chips">' + S.stHints.map(h =>
-        '<button class="chip" data-act="st-hint" data-val="' + esc(h) + '">' + esc(h) + "</button>").join("") + "</div>"
-    : "";
-  return '<div class="section"><h2>📖 ' + esc(T.study) + "</h2>" +
-    '<p class="tiny muted">' + esc(T.studyD) + "</p>" +
-    '<div class="composer" style="position:static;margin:0">' +
-    '<input class="input" id="st-q" placeholder="' + esc(T.topicPh) + '" value="' + esc(S.stQuery) + '">' +
-    '<button class="btn primary sm" data-act="st-find">' + esc(T.findTopic) + "</button></div>" +
-    (S.stBusy ? '<div class="loader">' + esc(T.preparing) + "</div>" : "") +
-    hints + "<h3>" + esc(T.pickSubject) + "</h3>" + subs + "</div>";
-}
-
-/* ================ 12. MAVZU: MATERIAL + JAVOB ===================== */
-function viewTopic() {
-  const t = S.topic;
-  if (!t) return '<div class="loader">' + esc(T.loading) + "</div>";
-  const col = SUB_COLOR[t.subject] || "#8B6BFF";
-  let out = '<div class="section"><div class="card spine" style="--accent:' + col + '">' +
-    "<h2>" + esc(t.title) + "</h2>" +
-    (t.subject ? '<div class="chips" style="margin-top:7px"><span class="chip" style="padding:4px 9px;font-size:11.5px">' +
-      '<span class="pt" style="background:' + col + '"></span>' + esc(subName(t.subject)) + "</span></div>" : "") +
-    (t.summary ? '<p style="margin-top:9px;font-size:14px;line-height:1.5">' + esc(t.summary) + "</p>" : "") +
-    "</div>";
-
-  if (t.keyPoints && t.keyPoints.length)
-    out += '<div class="card"><label class="tiny muted">' + esc(T.keyPoints) + "</label>" +
-      '<ul class="pts">' + t.keyPoints.map(p =>
-        '<li><span class="mk">•</span><span>' + esc(p) + "</span></li>").join("") + "</ul></div>";
-
-  if (t.formulas && t.formulas.length)
-    out += '<div class="card"><label class="tiny muted">' + esc(T.formulas) + "</label>" +
-      t.formulas.map(f => '<div class="fml"><b>' + esc(f.name) + "</b><code>" + esc(f.body) + "</code>" +
-        (f.note ? "<small>" + esc(f.note) + "</small>" : "") + "</div>").join("") + "</div>";
-
-  if (t.terms && t.terms.length)
-    out += '<div class="card"><label class="tiny muted">' + esc(T.terms) + "</label>" +
-      '<ul class="pts">' + t.terms.map(x =>
-        '<li><span class="mk">▸</span><span><b>' + esc(x.term) + "</b> — " + esc(x.def) + "</span></li>").join("") + "</ul></div>";
-
-  if (t.questions && t.questions.length)
-    out += '<div class="card spine" style="--accent:var(--blue)"><label class="tiny muted">' + esc(T.qs) + "</label>" +
-      '<ul class="pts">' + t.questions.map((q, i) =>
-        '<li><span class="mk">' + (i + 1) + ".</span><span>" + esc(q) + "</span></li>").join("") + "</ul></div>";
-
-  out += '<div class="card"><h3>' + esc(T.answerTitle) + "</h3>" +
-    '<p class="tiny muted" style="margin:4px 0 9px">' + esc(T.answerHint) + "</p>" +
-    '<div style="display:flex;gap:9px;align-items:flex-start">' +
-    '<textarea id="st-ans" style="min-height:150px" placeholder="' + esc(T.answerPh) + '">' + esc(S.stAnswer) + "</textarea>" +
-    '<button class="mic" id="mic" data-act="st-voice">🎙</button></div>' +
-    '<button class="btn primary wide" style="margin-top:11px" data-act="st-check"' + (S.stBusy ? " disabled" : "") + ">" +
-    (S.stBusy ? esc(T.analyzing) : "✦ " + esc(T.check)) + "</button></div>" +
-    '<button class="btn wide" data-act="go-study">← ' + esc(T.newTopic) + "</button></div>";
-  return out;
-}
-
-/* ==================== 13. TAHLIL NATIJASI ========================= */
-function viewResult() {
-  const r = S.stResult, t = S.topic || {};
-  if (!r) return '<div class="loader">' + esc(T.loading) + "</div>";
-  const tone = r.percent >= 75 ? "#22D07C" : r.percent >= 45 ? "#FFB648" : "#FF5C6E";
-  const sc = r.scores || {};
-  const bar = (label, v) => '<div class="bar"><div class="t"><b>' + esc(label) + "</b><span>" + v + "%</span></div>" +
-    '<div class="r"><i data-w="' + v + '" style="width:0;background:' + (v >= 70 ? "#22D07C" : v >= 40 ? "#FFB648" : "#FF5C6E") + '"></i></div></div>';
-
-  let out = '<div class="section">' +
-    '<div class="card" style="text-align:center">' +
-    '<div class="ring" data-p="' + r.percent + '" data-c="' + tone + '">' +
-    '<svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="var(--card2)" stroke-width="11"></circle>' +
-    '<circle class="pg" cx="60" cy="60" r="52" fill="none" stroke="' + tone + '" stroke-width="11" ' +
-    'stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="327"></circle></svg>' +
-    '<div class="n" style="color:' + tone + '">' + r.percent + "<small>%</small></div></div>" +
-    '<p class="tiny muted" style="margin-top:7px">' + esc(T.similarity) + "</p>" +
-    (r.verdict ? '<p style="margin-top:9px;font-size:14px">' + esc(r.verdict) + "</p>" : "") + "</div>" +
-    '<div class="card bars">' +
-    bar(T.concept, sc.tushuncha || 0) + bar(T.fmlS, sc.formulalar || 0) +
-    bar(T.trmS, sc.atamalar || 0) + bar(T.fullness, sc.toliqlik || 0) + "</div>";
-
-  const block = (title, arr, mark, color) => (arr && arr.length)
-    ? '<div class="card"><label class="tiny muted" style="color:' + color + '">' + esc(title) +
-      " · " + arr.length + "</label><ul class=\"pts\">" + arr.map(x =>
-        '<li><span class="mk" style="color:' + color + '">' + mark + "</span><span>" + esc(x) + "</span></li>").join("") + "</ul></div>"
-    : "";
-
-  out += block(T.gotRight, r.correct, "✓", "#22D07C");
-  out += block(T.forgot, r.missing, "•", "#FFB648");
-  if (r.wrong && r.wrong.length)
-    out += '<div class="card"><label class="tiny muted" style="color:#FF5C6E">' + esc(T.mistakes) +
-      " · " + r.wrong.length + '</label><div class="pts">' + r.wrong.map(w =>
-        '<div class="fx"><s>' + esc(w.said) + "</s><br><em>→ " + esc(w.fix) + "</em></div>").join("") + "</div></div>";
-  out += block(T.missedF, r.formulasMissed, "ƒ", "#3E93FF");
-  if (r.advice)
-    out += '<div class="card spine" style="--accent:var(--violet)"><label class="tiny muted">💡 ' + esc(T.advice) +
-      '</label><p style="margin-top:6px;font-size:14px;line-height:1.5">' + esc(r.advice) + "</p></div>";
-
-  out += '<div class="two"><button class="btn" data-act="st-retry">↻ ' + esc(T.tryAgain) + "</button>" +
-    '<button class="btn primary" data-act="go-study">' + esc(T.newTopic) + "</button></div></div>";
-  return out;
-}
-/* halqa va ustunlarni jonlantirish */
-function drawRings() {
-  setTimeout(() => {
-    const ring = $(".ring");
-    if (ring) {
-      const p = Math.max(0, Math.min(100, +ring.dataset.p || 0));
-      const c = $(".pg", ring);
-      if (c) c.style.strokeDashoffset = String(327 - (327 * p) / 100);
-      if (c) c.style.transition = "stroke-dashoffset .9s ease";
-    }
-    document.querySelectorAll(".bar .r i").forEach(el => { el.style.width = (el.dataset.w || 0) + "%"; });
-  }, 60);
-}
-
-/* ==================== 14. AI SUHBAT =============================== */
-function viewAiChat() {
-  return '<div class="section">' +
-    '<div class="rowline"><h2>🤖 ' + esc(T.aiChat) + "</h2>" +
-    (S.aiMsgs.length ? '<button class="btn sm danger" data-act="ai-clear">' + esc(T.clearChat) + "</button>" : "") +
-    "</div>" +
-    '<div id="aiBody">' + aiBody() + "</div>" +
-    '<div class="composer"><input class="input" id="ai-msg" placeholder="' + esc(T.aiPh) + '" autocomplete="off">' +
-    '<button class="mic" id="mic" data-act="ai-voice" style="width:40px;height:40px;font-size:17px">🎙</button>' +
-    '<button class="btn primary sm" data-act="ai-send">➤</button></div></div>';
-}
-function aiBody() {
-  if (!S.aiMsgs.length && !S.aiBusy)
-    return '<div class="card spine" style="--accent:var(--blue)"><p class="md">' + esc(T.aiHello) + "</p></div>";
-  return '<div class="thread" id="thread">' + S.aiMsgs.map(m =>
-    '<div class="bubble ' + (m.role === "me" ? "me" : "ai") + '"><span class="md">' + esc(m.text) + "</span>" +
-    "<time>" + fmtTime(m.at) + "</time></div>").join("") +
-    (S.aiBusy ? '<div class="bubble ai"><span class="dots"><i></i><i></i><i></i></span></div>' : "") + "</div>";
-}
-function renderAiBody() {
-  const b = $("#aiBody");
-  if (b) { b.innerHTML = aiBody(); const t = $("#thread"); if (t) t.scrollIntoView({ block: "end" }); }
-}
-
-/* ==================== 15. VIKTORINA =============================== */
-function viewQuiz() {
-  /* natija ekrani */
-  if (S.qzResult) {
-    const r = S.qzResult, pc = Math.round((r.correct / r.total) * 100);
-    const tone = pc >= 70 ? "#22D07C" : pc >= 40 ? "#FFB648" : "#FF5C6E";
-    return '<div class="section"><div class="card" style="text-align:center">' +
-      '<div style="font-size:46px">' + (pc >= 70 ? "🏆" : pc >= 40 ? "👏" : "📚") + "</div>" +
-      '<h2 style="margin-top:6px">' + esc(T.yourScore) + "</h2>" +
-      '<div style="font-size:35px;font-weight:800;color:' + tone + ';margin:7px 0">' +
-      r.correct + "/" + r.total + "</div>" +
-      '<p class="tiny muted">+' + r.points + " " + esc(T.pts) + " · " + pc + "% " + esc(T.rightA) + "</p></div>" +
-      r.results.map((x, i) => '<div class="card"><b style="font-size:14px">' + (i + 1) + ". " + esc(x.q) + "</b>" +
-        '<div class="qz">' + x.options.map((o, k) =>
-          '<button disabled class="' + (k === x.answer ? "ok" : k === x.picked ? "no" : "") + '">' +
-          '<span class="k">' + (k === x.answer ? "✓" : k === x.picked ? "✕" : String.fromCharCode(65 + k)) + "</span>" +
-          "<span>" + esc(o) + "</span></button>").join("") + "</div>" +
-        (x.why ? '<p class="tiny muted" style="margin-top:8px">💡 ' + esc(x.why) + "</p>" : "") + "</div>").join("") +
-      '<div class="two"><button class="btn" data-act="qz-reset">↻ ' + esc(T.again) + "</button>" +
-      '<button class="btn primary" data-act="go-board">🏆 ' + esc(T.toBoard) + "</button></div></div>";
-  }
-
-  /* o'yin ekrani */
-  if (S.qz) {
-    const q = S.qz.questions[S.qz.i];
-    const picked = S.qz.answers[S.qz.i];
-    const prog = S.qz.questions.map((_, i) =>
-      '<i class="' + (i < S.qz.i ? "on" : i === S.qz.i ? "on" : "") + '"></i>').join("");
-    const last = S.qz.i === S.qz.questions.length - 1;
-    return '<div class="section"><div class="prog">' + prog + "</div>" +
-      '<div class="rowline"><span class="tiny muted">' + esc(T.question) + " " + (S.qz.i + 1) +
-      "/" + S.qz.questions.length + "</span>" +
-      '<span class="badge soft">' + esc(subName(S.qz.subject)) + "</span></div>" +
-      '<div class="card"><b style="font-size:16px;line-height:1.4">' + esc(q.q) + "</b>" +
-      '<div class="qz">' + q.options.map((o, k) =>
-        '<button class="' + (picked === k ? "on" : "") + '" data-act="qz-pick" data-val="' + k + '">' +
-        '<span class="k">' + String.fromCharCode(65 + k) + "</span><span>" + esc(o) + "</span></button>").join("") +
-      "</div></div>" +
-      '<div class="two">' +
-      '<button class="btn" data-act="qz-prev"' + (S.qz.i === 0 ? " disabled" : "") + ">← " + esc(T.back) + "</button>" +
-      '<button class="btn primary" data-act="' + (last ? "qz-finish" : "qz-next") + '"' +
-      (picked === undefined ? " disabled" : "") + ">" + esc(last ? T.finishQuiz : T.next) + "</button></div>" +
-      (S.qzBusy ? '<div class="loader">' + esc(T.loading) + "</div>" : "") + "</div>";
-  }
-
-  /* sozlash ekrani */
-  const st = S.qzSetup;
-  const lv = [["easy", T.easy], ["mid", T.mid], ["hard", T.hard]].map(([v, l]) =>
-    '<button class="chip ' + (st.level === v ? "on" : "") + '" data-act="qz-level" data-val="' + v + '">' + esc(l) + "</button>").join("");
-  const cn = [3, 5, 7, 10].map(n =>
-    '<button class="chip ' + (st.count === n ? "on" : "") + '" data-act="qz-count" data-val="' + n + '">' + n + "</button>").join("");
-  return '<div class="section"><h2>🎮 ' + esc(T.quiz) + "</h2>" +
-    '<p class="tiny muted">' + esc(T.quizD) + "</p>" +
-    '<div class="field"><label>' + esc(T.level) + '</label><div class="chips">' + lv + "</div></div>" +
-    '<div class="field"><label>' + esc(T.count) + '</label><div class="chips">' + cn + "</div></div>" +
-    '<div class="field"><label>' + esc(T.pickSubject) + "</label>" +
-    '<div class="grid">' + SUBJECTS.map(id => tile(id, st.subject === id, "qz-subject")).join("") + "</div></div>" +
-    '<button class="btn primary wide" data-act="qz-start"' + (S.qzBusy ? " disabled" : "") + ">" +
-    (S.qzBusy ? esc(T.building) : "▶ " + esc(T.startQuiz)) + "</button></div>";
-}
-
-/* ==================== 16. PESHQADAMLAR ============================ */
-function viewBoard() {
-  const b = S.board;
-  if (!b) return '<div class="loader">' + esc(T.loading) + "</div>";
-  const per = [["all", T.allTime], ["week", T.weekly]].map(([v, l]) =>
-    '<button class="chip ' + (S.boardPeriod === v ? "on" : "") + '" data-act="bd-period" data-val="' + v + '">' + esc(l) + "</button>").join("");
-  const subs = '<button class="chip ' + (!S.boardSubject ? "on" : "") + '" data-act="bd-subject" data-val="">' +
-    esc(T.all) + "</button>" + SUBJECTS.map(s =>
-    '<button class="chip ' + (S.boardSubject === s ? "on" : "") + '" data-act="bd-subject" data-val="' + s + '">' +
-    esc(subName(s)) + "</button>").join("");
-
-  const row = (x) => '<div class="lb ' + (x.me ? "me " : "") + "g" + x.place + '">' +
-    '<span class="pl">' + (x.place === 1 ? "🥇" : x.place === 2 ? "🥈" : x.place === 3 ? "🥉" : x.place) + "</span>" +
-    avatar(x, "sm") + '<div style="flex:1;min-width:0"><b style="font-size:14px">' + esc(x.name) + "</b>" +
-    '<div class="tiny muted">' + x.games + " " + esc(T.games) + " · " + x.accuracy + "% " + esc(T.accuracy) + "</div></div>" +
-    '<div class="pts2"><b>' + x.points + "</b><span>" + esc(T.pts) + "</span></div></div>";
-
-  return '<div class="section"><h2>🏆 ' + esc(T.board) + "</h2>" +
-    '<div class="chips">' + per + "</div>" +
-    '<div class="scroll-x">' + subs + "</div>" +
-    (b.top.length
-      ? '<div class="list">' + b.top.map(row).join("") + "</div>" +
-        (b.mine && !b.top.some(x => x.me) ? "<h3>" + esc(T.mystat) + "</h3>" + row(b.mine) : "")
-      : '<div class="empty"><div class="big">🎮</div>' + esc(T.noBoard) +
-        '<div style="margin-top:12px"><button class="btn primary sm" data-act="go-quiz">' + esc(T.startQuiz) + "</button></div></div>") +
-    "</div>";
-}
-
-/* ==================== 17. SHAXSIY STATISTIKA ====================== */
-function viewStats() {
-  const s = S.stats;
-  if (!s) return '<div class="loader">' + esc(T.loading) + "</div>";
-  if (!s.total) return '<div class="empty"><div class="big">📊</div>' + esc(T.noStats) +
-    '<div style="margin-top:12px"><button class="btn primary sm" data-act="go-study">' + esc(T.study) + "</button></div></div>";
-
-  const bars = s.bySubject.map(x =>
-    '<div class="bar"><div class="t"><b>' + esc(subName(x.subject) || T.all) + "</b>" +
-    "<span>" + x.avg + "% · " + x.n + " " + esc(T.tries) + "</span></div>" +
-    '<div class="r"><i data-w="' + x.avg + '" style="width:0;background:' +
-    (SUB_COLOR[x.subject] || "#8B6BFF") + '"></i></div></div>').join("");
-
-  return '<div class="section"><h2>📊 ' + esc(T.mystat) + "</h2>" +
-    '<div class="stat"><div><b>' + s.total + "</b><span>" + esc(T.tries) + "</span></div>" +
-    "<div><b>" + s.avg + "%</b><span>" + esc(T.avgS) + "</span></div>" +
-    "<div><b>" + s.best + "%</b><span>" + esc(T.bestS) + "</span></div></div>" +
-    (bars ? '<div class="card bars"><label class="tiny muted">' + esc(T.bySubject) + "</label>" + bars + "</div>" : "") +
-    "<h3>" + esc(T.lastTries) + '</h3><div class="list">' + s.recent.map(x => {
-      const tone = x.percent >= 70 ? "open" : x.percent >= 40 ? "soft" : "closed";
-      return '<div class="card" style="padding:11px 13px"><div class="rowline">' +
-        '<b style="font-size:14px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(x.title) + "</b>" +
-        '<span class="badge ' + tone + '">' + x.percent + "%</span></div>" +
-        '<div class="tiny muted">' + esc(subName(x.subject) || "—") + " · " + fmtTime(x.at) +
-        " · " + x.words + " " + esc(T.words) + "</div></div>";
-    }).join("") + "</div></div>";
-}
-
-/* ==================== 18. GURUH CHATI ============================= */
-function viewGChat() {
-  const g = S.gchat || {};
-  return '<div class="section">' +
-    '<div class="card spine" style="--accent:' + (SUB_COLOR[g.subject] || "#8B6BFF") + '">' +
-    '<div class="rowline"><b>' + esc(g.title || "") + "</b>" +
-    '<span class="badge soft">👥 ' + (g.members || 0) + "</span></div>" +
-    '<div class="tiny muted">' + esc(subName(g.subject) || "") + "</div></div>" +
-    '<div id="gBody">' + gBody() + "</div>" +
-    '<div class="composer"><input class="input" id="gmsg" placeholder="' + esc(T.gchatPh) + '" autocomplete="off">' +
-    '<button class="btn primary sm" data-act="g-send">➤</button></div></div>';
-}
-function gBody() {
-  if (!S.gmsgs.length) return '<div class="empty tiny">' + esc(T.noChats) + "</div>";
-  let prev = "";
-  return '<div class="thread" id="thread">' + S.gmsgs.map(m => {
-    const mine = m.from === S.me.id;
-    const who = S.gwho[m.from] || {};
-    const head = (!mine && prev !== m.from)
-      ? '<b style="display:block;font-size:11.5px;opacity:.75;margin-bottom:2px">' + esc(who.name || "—") +
-        (who.role === "mentor" ? " 🎓" : "") + "</b>" : "";
-    prev = m.from;
-    return '<div class="bubble ' + (mine ? "me" : "them") + '">' + head + esc(m.text) +
-      "<time>" + fmtTime(m.at) + "</time></div>";
-  }).join("") + "</div>";
-}
-function renderGBody() {
-  const b = $("#gBody");
-  if (b) { b.innerHTML = gBody(); const t = $("#thread"); if (t) t.scrollIntoView({ block: "end" }); }
-}
-
-/* ==================== OVOZLI KIRITISH ============================= */
-let REC = null;
-function voiceInto(inputId) {
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SR) return toast(T.noVoice);
-  const el = $("#" + inputId);
-  if (!el) return;
-  if (REC) { try { REC.stop(); } catch (e) {} REC = null; return; }
-
-  const r = new SR();
-  r.lang = { uz: "uz-UZ", cyr: "uz-UZ", ru: "ru-RU", en: "en-US" }[S.lang] || "uz-UZ";
-  r.continuous = true; r.interimResults = true;
-  const base = el.value;
-  const mic = $("#mic"); if (mic) mic.classList.add("rec");
-  toast(T.listening);
-
-  r.onresult = (ev) => {
-    let txt = "";
-    for (let i = 0; i < ev.results.length; i++) txt += ev.results[i][0].transcript;
-    el.value = (base ? base + " " : "") + txt;
-    if (inputId === "st-ans") S.stAnswer = el.value;
-  };
-  r.onerror = () => { toast(T.error); stopVoice(); };
-  r.onend = () => stopVoice();
-  try { r.start(); REC = r; } catch (e) { toast(T.noVoice); stopVoice(); }
-}
-function stopVoice() {
-  REC = null;
-  const mic = $("#mic"); if (mic) mic.classList.remove("rec");
-}
-
 /* ========================== PASTKI OYNALAR ========================== */
 function openSheet(html) {
   $("#sheet").innerHTML = '<div class="grab"></div>' + html;
@@ -1500,7 +861,7 @@ function grabProfile() {
 function sheetGroup(g) {
   S.gedit = g ? Object.assign({}, g) : {
     id: "", title: "", subject: (S.me.subjects && S.me.subjects[0]) || SUBJECTS[0], days: [],
-    timeFrom: S.me.timeFrom || "", timeTo: S.me.timeTo || "", duration: 60, limit: 30,
+    timeFrom: S.me.timeFrom || "", timeTo: S.me.timeTo || "", duration: 60, limit: 12,
     location: S.me.location || "", open: true
   };
   drawGroupSheet();
@@ -1519,7 +880,7 @@ function drawGroupSheet() {
     '<div class="field"><label>' + esc(T.to) + '</label><input class="input" id="g-to" type="time" value="' + esc(g.timeTo) + '"></div></div>' +
     '<div class="two" style="margin-top:12px">' +
     '<div class="field"><label>' + esc(T.duration) + " (" + esc(T.min) + ')</label><input class="input" id="g-dur" type="number" value="' + esc(g.duration) + '"></div>' +
-    '<div class="field"><label>' + esc(T.limit) + '</label><input class="input" id="g-limit" type="number" min="1" max="100000" value="' + esc(g.limit) + '"></div></div>' +
+    '<div class="field"><label>' + esc(T.limit) + '</label><input class="input" id="g-limit" type="number" value="' + esc(g.limit) + '"></div></div>' +
     '<div class="field" style="margin-top:12px"><label>' + esc(T.location) + '</label><input class="input" id="g-loc" value="' + esc(g.location) + '" placeholder="' + esc(T.locPh) + '"></div>' +
     '<div class="rowline card" style="margin-top:12px"><div><b>' + esc(T.openWork) + '</b><div class="tiny muted">' + esc(T.openHint) + "</div></div>" +
     '<button class="chip ' + (g.open ? "on" : "") + '" data-act="g-open">' + esc(g.open ? T.open : T.closed) + "</button></div>" +
@@ -1690,102 +1051,6 @@ const ACT = {
     catch (e) { toast(errText(e)); }
   },
 
-  /* ---------- AI BO'LIMI ---------- */
-  "go-study"() { S.topic = null; S.stResult = null; S.stAnswer = ""; nav("study"); },
-  "go-aichat"() { nav("aichat"); },
-  "go-quiz"() { S.qz = null; S.qzResult = null; nav("quiz"); },
-  "go-board"() { nav("board"); },
-  "go-stats"() { nav("mystat"); },
-
-  /* mavzu tahlili */
-  "st-subject"(v) { S.stSubject = S.stSubject === v ? "" : v; LS.setItem("stsub", S.stSubject); go("study"); },
-  "st-hint"(v) { S.stQuery = v; ACT["st-find"](); },
-  async "st-find"() {
-    const box = $("#st-q");
-    const q = (S.stQuery = ((box && box.value) || S.stQuery || "").trim());
-    if (q.length < 2) return toast(T.required);
-    S.stBusy = true; render();
-    try {
-      const r = await api("/api/ai/topic", { subject: S.stSubject, title: q });
-      S.topic = r.topic; S.stAnswer = ""; S.stResult = null; S.stBusy = false;
-      nav("topic");
-    } catch (e) { S.stBusy = false; render(); toast(errText(e)); }
-  },
-  "st-voice"() { const a = $("#st-ans"); if (a) S.stAnswer = a.value; voiceInto("st-ans"); },
-  async "st-check"() {
-    const a = $("#st-ans");
-    S.stAnswer = ((a && a.value) || "").trim();
-    if (S.stAnswer.length < 10) return toast(T.shortAns);
-    stopVoice();
-    S.stBusy = true; render();
-    try {
-      const r = await api("/api/ai/check", { topicId: S.topic.id, answer: S.stAnswer });
-      S.stResult = r.result; S.stBusy = false;
-      haptic("medium"); nav("result");
-    } catch (e) { S.stBusy = false; render(); toast(errText(e)); }
-  },
-  "st-retry"() { S.stResult = null; nav("topic"); },
-
-  /* AI suhbat */
-  "ai-voice"() { voiceInto("ai-msg"); },
-  async "ai-send"() {
-    const box = $("#ai-msg"); const text = ((box && box.value) || "").trim();
-    if (!text || S.aiBusy) return;
-    box.value = ""; stopVoice();
-    S.aiMsgs.push({ role: "me", text, at: Date.now() });
-    S.aiBusy = true; renderAiBody();
-    try { S.aiMsgs = (await api("/api/ai/chat", { text })).messages; }
-    catch (e) { S.aiMsgs.pop(); toast(errText(e)); }
-    S.aiBusy = false; renderAiBody();
-  },
-  async "ai-clear"() {
-    if (!confirm(T.sure)) return;
-    try { await api("/api/ai/chat", { text: "-", reset: true }); S.aiMsgs = []; render(); }
-    catch (e) { toast(errText(e)); }
-  },
-
-  /* viktorina */
-  "qz-subject"(v) { S.qzSetup.subject = v; render(); },
-  "qz-level"(v) { S.qzSetup.level = v; render(); },
-  "qz-count"(v) { S.qzSetup.count = +v; render(); },
-  async "qz-start"() {
-    const st = S.qzSetup;
-    if (!st.subject) return toast(T.pickSubject);
-    S.qzBusy = true; render();
-    try {
-      const r = await api("/api/quiz/start", { subject: st.subject, level: st.level, count: st.count });
-      S.qz = { sid: r.sid, subject: r.subject, questions: r.questions, i: 0, answers: [] };
-      S.qzResult = null;
-    } catch (e) { toast(errText(e)); }
-    S.qzBusy = false; render();
-  },
-  "qz-pick"(v) { haptic(); S.qz.answers[S.qz.i] = +v; render(); },
-  "qz-next"() { if (S.qz.i < S.qz.questions.length - 1) { S.qz.i++; render(); window.scrollTo(0, 0); } },
-  "qz-prev"() { if (S.qz.i > 0) { S.qz.i--; render(); window.scrollTo(0, 0); } },
-  async "qz-finish"() {
-    S.qzBusy = true; render();
-    try {
-      const r = await api("/api/quiz/submit", { sid: S.qz.sid, answers: S.qz.answers });
-      S.qzResult = r; S.qz = null; haptic("medium");
-    } catch (e) { toast(errText(e)); }
-    S.qzBusy = false; render(); window.scrollTo(0, 0);
-  },
-  "qz-reset"() { S.qz = null; S.qzResult = null; render(); window.scrollTo(0, 0); },
-
-  /* peshqadamlar */
-  async "bd-period"(v) { S.boardPeriod = v; try { await loadBoard(); } catch (e) {} render(); },
-  async "bd-subject"(v) { S.boardSubject = v; try { await loadBoard(); } catch (e) {} render(); },
-
-  /* guruh chati */
-  "g-chat"(v) { S.history.push({ s: S.screen, p: S.screenParam }); go("gchat", v); },
-  async "g-send"() {
-    const box = $("#gmsg"); const text = ((box && box.value) || "").trim();
-    if (!text) return;
-    box.value = "";
-    try { await api("/api/group/messages", { id: S.gchat.id, text }); await loadGChat(S.gchat.id, true); }
-    catch (e) { toast(errText(e)); }
-  },
-
   /* admin */
   admin() { closeSheet(); S.history.push({ s: S.screen, p: S.screenParam }); S.screen = "admin"; if (S.adminToken) loadAdmin(); else render(); },
   async "admin-login"() {
@@ -1821,8 +1086,6 @@ document.addEventListener("click", (ev) => {
 });
 let qTimer = null;
 document.addEventListener("input", (ev) => {
-  if (ev.target.id === "st-ans") { S.stAnswer = ev.target.value; return; }
-  if (ev.target.id === "st-q") { S.stQuery = ev.target.value; return; }
   if (ev.target.id !== "q") return;
   S.q = ev.target.value;
   clearTimeout(qTimer);
@@ -1835,12 +1098,7 @@ document.addEventListener("input", (ev) => {
   }, 350);
 });
 document.addEventListener("keydown", (ev) => {
-  if (ev.key !== "Enter") return;
-  const id = ev.target.id;
-  if (id === "msg") { ev.preventDefault(); ACT.send(); }
-  if (id === "ai-msg") { ev.preventDefault(); ACT["ai-send"](); }
-  if (id === "gmsg") { ev.preventDefault(); ACT["g-send"](); }
-  if (id === "st-q") { ev.preventDefault(); ACT["st-find"](); }
+  if (ev.key === "Enter" && ev.target.id === "msg") { ev.preventDefault(); ACT.send(); }
 });
 $("#sheetBg").addEventListener("click", (ev) => { if (ev.target.id === "sheetBg") closeSheet(); });
 
