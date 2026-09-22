@@ -1,0 +1,1410 @@
+<!doctype html>
+<html lang="uz" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>To'garakga qatnashmaysizmi ?</title>
+<style>
+/* ===================== TOKENLAR ===================== */
+:root{
+  --green:#22D07C; --green-d:#12A661;
+  --violet:#8B6BFF; --violet-d:#6D46F5;
+  --blue:#3E93FF;  --blue-d:#1E6EE0;
+  --red:#FF5C6E;   --amber:#FFB648;
+
+  --bg:#080B12; --bg2:#0E1320; --card:#131A2A; --card2:#182134;
+  --line:#243049; --txt:#EAF0FA; --muted:#8B9BBB; --shadow:0 10px 30px rgba(0,0,0,.45);
+  --accent:var(--violet);
+  --r:16px; --r-s:10px;
+}
+[data-theme="light"]{
+  --bg:#F4F6FB; --bg2:#FFFFFF; --card:#FFFFFF; --card2:#F2F5FB;
+  --line:#E1E7F2; --txt:#0B1220; --muted:#61708C; --shadow:0 8px 24px rgba(16,32,64,.10);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;height:100%}
+body{
+  background:var(--bg); color:var(--txt);
+  font-family:"Inter","SF Pro Text",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:15px; line-height:1.45; letter-spacing:-.01em;
+  overscroll-behavior-y:none;
+}
+@media (prefers-reduced-motion:no-preference){
+  body,.card,.btn,.chip{transition:background-color .18s ease,color .18s ease,border-color .18s ease}
+}
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.025em}
+h1{font-size:23px} h2{font-size:18px} h3{font-size:15px}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--blue);text-decoration:none}
+
+/* ===================== KARKAS ===================== */
+#app{max-width:600px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;
+  background:var(--bg);padding-bottom:calc(74px + env(safe-area-inset-bottom))}
+.topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:10px;
+  padding:12px 14px;background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:9px;min-width:0;flex:1}
+.logo{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;flex:none;
+  background:linear-gradient(140deg,var(--violet),var(--blue) 55%,var(--green));
+  color:#fff;font-weight:800;font-size:15px}
+.brand b{font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand small{display:block;color:var(--muted);font-size:11px;font-weight:500}
+.icon-btn{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--card);
+  display:grid;place-items:center;cursor:pointer;font-size:15px;flex:none}
+.icon-btn:active{transform:scale(.94)}
+main{flex:1;padding:14px}
+.section{display:flex;flex-direction:column;gap:12px}
+.rowline{display:flex;align-items:center;justify-content:space-between;gap:10px}
+
+/* ===================== TAB BAR ===================== */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;justify-content:center;
+  padding:8px 10px calc(8px + env(safe-area-inset-bottom));
+  background:linear-gradient(to top,var(--bg) 62%,transparent)}
+.tabs{display:flex;gap:2px;width:100%;max-width:580px;background:var(--card);border:1px solid var(--line);
+  border-radius:18px;padding:5px;box-shadow:var(--shadow)}
+.tab{flex:1;border:0;background:none;padding:7px 2px 6px;border-radius:13px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--muted);font-size:10px;font-weight:600}
+.tab i{font-style:normal;font-size:17px;line-height:1}
+.tab.on{background:var(--card2);color:var(--txt)}
+.tab.on i{filter:none}
+.tab .dot{position:absolute;margin:-14px 0 0 16px;width:7px;height:7px;border-radius:50%;background:var(--red)}
+
+/* ===================== ELEMENTLAR ===================== */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+.card.spine{border-left:3px solid var(--accent)}
+.muted{color:var(--muted)}
+.tiny{font-size:12px}
+.btn{border:1px solid var(--line);background:var(--card2);color:var(--txt);border-radius:12px;
+  padding:11px 15px;font-weight:600;font-size:14px;cursor:pointer;display:inline-flex;
+  align-items:center;justify-content:center;gap:7px}
+.btn:active{transform:scale(.985)}
+.btn[disabled]{opacity:.45;pointer-events:none}
+.btn.primary{border:0;background:linear-gradient(135deg,var(--violet-d),var(--blue));color:#fff}
+.btn.go{border:0;background:var(--green-d);color:#fff}
+.btn.danger{border-color:color-mix(in srgb,var(--red) 40%,var(--line));color:var(--red)}
+.btn.wide{width:100%}
+.btn.sm{padding:8px 12px;font-size:13px;border-radius:10px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:12.5px;font-weight:600;color:var(--muted)}
+.input,textarea,select{width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:12px;
+  padding:12px 13px;font-size:15px;outline:none}
+textarea{resize:vertical;min-height:88px;line-height:1.5}
+.input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{border:1px solid var(--line);background:var(--card2);color:var(--muted);border-radius:999px;
+  padding:7px 12px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip .pt{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.chip.on{color:#fff;border-color:transparent;background:var(--accent)}
+.chip.on .pt{background:#fff}
+.badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.badge.open{background:color-mix(in srgb,var(--green) 18%,transparent);color:var(--green)}
+.badge.closed{background:color-mix(in srgb,var(--red) 16%,transparent);color:var(--red)}
+.badge.soft{background:var(--card2);color:var(--muted)}
+.avatar{width:46px;height:46px;border-radius:14px;object-fit:cover;flex:none;background:var(--card2);
+  display:grid;place-items:center;font-weight:700;color:#fff;font-size:16px}
+.avatar.sm{width:38px;height:38px;border-radius:11px;font-size:14px}
+.avatar.lg{width:72px;height:72px;border-radius:20px;font-size:24px}
+.list{display:flex;flex-direction:column;gap:10px}
+.empty{text-align:center;padding:38px 18px;color:var(--muted)}
+.empty .big{font-size:34px;margin-bottom:8px}
+.kv{display:flex;gap:8px;font-size:13px;color:var(--muted);flex-wrap:wrap}
+.kv span{display:inline-flex;align-items:center;gap:5px}
+.sep{height:1px;background:var(--line);margin:2px 0}
+
+/* fan katakchalari */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:9px}
+.tile{position:relative;border:1px solid var(--line);background:var(--card);border-radius:14px;
+  padding:34px 10px 11px;text-align:left;cursor:pointer;font-weight:600;font-size:13px;line-height:1.25;
+  overflow:hidden;min-height:84px}
+.tile::before{content:attr(data-mark);position:absolute;top:6px;left:10px;font-size:20px;font-weight:800;
+  color:var(--tc);opacity:.95}
+.tile::after{content:"";position:absolute;right:-16px;top:-16px;width:44px;height:44px;border-radius:50%;
+  background:var(--tc);opacity:.14}
+.tile.on{border-color:var(--tc);box-shadow:0 0 0 2px color-mix(in srgb,var(--tc) 35%,transparent)}
+.tile small{display:block;color:var(--muted);font-weight:500;font-size:11px;margin-top:3px}
+
+/* onboarding */
+.hero{border-radius:20px;padding:22px;color:#fff;
+  background:radial-gradient(120% 120% at 0% 0%,var(--violet-d) 0%,var(--blue-d) 48%,#0B2D22 100%)}
+.hero h1{font-size:25px;line-height:1.15}
+.hero p{margin-top:8px;opacity:.85;font-size:14px}
+.steps{display:flex;gap:5px;margin-bottom:4px}
+.steps i{height:3px;flex:1;border-radius:2px;background:var(--line)}
+.steps i.on{background:var(--accent)}
+.pick{display:flex;flex-direction:column;gap:10px}
+.pick .opt{display:flex;gap:12px;align-items:center;padding:14px;border-radius:14px;cursor:pointer;
+  border:1px solid var(--line);background:var(--card)}
+.pick .opt.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--card))}
+.pick .opt .em{font-size:24px}
+.pick .opt.lock{opacity:.5;cursor:not-allowed}
+
+/* chat */
+.thread{display:flex;flex-direction:column;gap:8px;padding:4px 0 8px}
+.bubble{max-width:82%;padding:9px 12px;border-radius:15px;font-size:14.5px;line-height:1.4;word-break:break-word}
+.bubble.them{align-self:flex-start;background:var(--card);border:1px solid var(--line);border-bottom-left-radius:5px}
+.bubble.me{align-self:flex-end;background:linear-gradient(135deg,var(--violet-d),var(--blue));color:#fff;border-bottom-right-radius:5px}
+.bubble time{display:block;font-size:10px;opacity:.65;margin-top:3px;text-align:right}
+.composer{position:sticky;bottom:calc(76px + env(safe-area-inset-bottom));display:flex;gap:8px;
+  padding:8px;background:var(--card);border:1px solid var(--line);border-radius:16px;margin-top:6px}
+.composer .input{border:0;background:transparent;padding:8px 6px}
+.composer .input:focus{box-shadow:none}
+
+/* sheet */
+.sheet-bg{position:fixed;inset:0;background:rgba(3,6,14,.6);z-index:60;display:none;align-items:flex-end;justify-content:center}
+.sheet-bg.on{display:flex}
+.sheet{width:100%;max-width:600px;background:var(--bg2);border-radius:22px 22px 0 0;border-top:1px solid var(--line);
+  padding:16px 16px calc(20px + env(safe-area-inset-bottom));max-height:88vh;overflow:auto}
+@media (prefers-reduced-motion:no-preference){.sheet-bg.on .sheet{animation:up .22s ease}}
+@keyframes up{from{transform:translateY(22px);opacity:.4}to{transform:none;opacity:1}}
+.sheet .grab{width:38px;height:4px;border-radius:2px;background:var(--line);margin:0 auto 14px}
+
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(92px + env(safe-area-inset-bottom));
+  background:var(--card);border:1px solid var(--line);color:var(--txt);padding:10px 16px;border-radius:12px;
+  font-size:13.5px;font-weight:600;z-index:90;box-shadow:var(--shadow);max-width:90%;text-align:center}
+.certs{display:flex;gap:8px;flex-wrap:wrap}
+.certs img{width:78px;height:78px;object-fit:cover;border-radius:12px;border:1px solid var(--line)}
+.certs .del{position:relative;margin:-10px 0 0 -14px;background:var(--red);color:#fff;border:0;border-radius:50%;
+  width:20px;height:20px;font-size:12px;cursor:pointer;z-index:2}
+.stat{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.stat div{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:11px}
+.stat b{display:block;font-size:20px}
+.stat span{font-size:11px;color:var(--muted)}
+.loader{padding:34px;text-align:center;color:var(--muted);font-size:13px}
+/* guruh chati */
+.gchat-pin{background:color-mix(in srgb,var(--violet) 12%,var(--card));border:1px solid color-mix(in srgb,var(--violet) 30%,var(--line));
+  border-radius:12px;padding:9px 12px;font-size:13px;margin-bottom:4px;display:flex;align-items:flex-start;gap:8px}
+.gchat-pin .pin-ico{font-size:16px;flex:none;margin-top:1px}
+.bubble img{max-width:220px;border-radius:10px;display:block;margin-top:5px;cursor:pointer}
+.bubble .pin-btn{font-size:11px;margin-top:4px;opacity:.7;background:none;border:none;cursor:pointer;color:inherit;padding:0}
+.img-preview{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:100;display:flex;align-items:center;justify-content:center}
+.img-preview img{max-width:95vw;max-height:90vh;border-radius:12px}
+.img-preview.hide{display:none}
+.composer .img-btn{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--card2);
+  display:grid;place-items:center;cursor:pointer;font-size:17px;flex:none}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <button class="icon-btn" data-act="back" id="btnBack" hidden>←</button>
+    <div class="brand">
+      <div class="logo">T</div>
+      <div style="min-width:0">
+        <b id="hdTitle">To'garak</b>
+        <small id="hdSub"></small>
+      </div>
+    </div>
+    <button class="icon-btn" data-act="theme" id="btnTheme">🌙</button>
+    <button class="icon-btn" data-act="settings">⚙️</button>
+  </header>
+  <main id="view"><div class="loader">…</div></main>
+  <nav class="tabbar" id="tabbar" hidden><div class="tabs" id="tabs"></div></nav>
+</div>
+<div class="sheet-bg" id="sheetBg"><div class="sheet" id="sheet"></div></div>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+"use strict";
+/* ========================== TILLAR ========================== */
+const SUBJECTS = ["matematika","ona_tili","adabiyot","ingliz_tili","turk_tili","rus_tili","shaxmat",
+  "mental","fransuz_tili","fizika","kimyo","biologiya","geografiya","uz_tarix","jahon_tarix",
+  "huquq","iqtisod"];
+
+const SUB_COLOR = {matematika:"#8B6BFF",ona_tili:"#22D07C",adabiyot:"#FFB648",ingliz_tili:"#3E93FF",
+  turk_tili:"#FF7A9C",rus_tili:"#4ED0E8",shaxmat:"#9AA8C4",mental:"#2ED3A0",fransuz_tili:"#B07BFF",
+  fizika:"#3E93FF",kimyo:"#22D07C",biologiya:"#4ADE80",geografiya:"#38BDF8",uz_tarix:"#FFB648",
+  jahon_tarix:"#F59E7B",huquq:"#8B6BFF",iqtisod:"#22D07C"};
+
+const SUB_NAME = {
+  uz:{matematika:"Matematika",ona_tili:"Ona tili",adabiyot:"Adabiyot",ingliz_tili:"Ingliz tili",
+    turk_tili:"Turk tili",rus_tili:"Rus tili",shaxmat:"Shaxmat",mental:"Mental arifmetika",
+    fransuz_tili:"Fransuz tili",fizika:"Fizika",kimyo:"Kimyo",biologiya:"Biologiya",
+    geografiya:"Geografiya",uz_tarix:"O'zbekiston tarixi",jahon_tarix:"Jahon tarixi",
+    huquq:"Huquqshunoslik",iqtisod:"Iqtisodiyot"},
+  cyr:{matematika:"Математика",ona_tili:"Она тили",adabiyot:"Адабиёт",ingliz_tili:"Инглиз тили",
+    turk_tili:"Турк тили",rus_tili:"Рус тили",shaxmat:"Шахмат",mental:"Ментал арифметика",
+    fransuz_tili:"Француз тили",fizika:"Физика",kimyo:"Кимё",biologiya:"Биология",
+    geografiya:"География",uz_tarix:"Ўзбекистон тарихи",jahon_tarix:"Жаҳон тарихи",
+    huquq:"Ҳуқуқшунослик",iqtisod:"Иқтисодиёт"},
+  ru:{matematika:"Математика",ona_tili:"Родной язык",adabiyot:"Литература",ingliz_tili:"Английский",
+    turk_tili:"Турецкий",rus_tili:"Русский язык",shaxmat:"Шахматы",mental:"Ментальная арифметика",
+    fransuz_tili:"Французский",fizika:"Физика",kimyo:"Химия",biologiya:"Биология",
+    geografiya:"География",uz_tarix:"История Узбекистана",jahon_tarix:"Всемирная история",
+    huquq:"Право",iqtisod:"Экономика"},
+  en:{matematika:"Mathematics",ona_tili:"Native language",adabiyot:"Literature",ingliz_tili:"English",
+    turk_tili:"Turkish",rus_tili:"Russian",shaxmat:"Chess",mental:"Mental arithmetic",
+    fransuz_tili:"French",fizika:"Physics",kimyo:"Chemistry",biologiya:"Biology",
+    geografiya:"Geography",uz_tarix:"History of Uzbekistan",jahon_tarix:"World history",
+    huquq:"Law",iqtisod:"Economics"}
+};
+
+const I18N = {
+uz:{app:"To'garakga qatnashmaysizmi",sub:"To'garak va mentorlar",next:"Davom etish",back:"Orqaga",
+ save:"Saqlash",saved:"Saqlandi",cancel:"Bekor qilish",del:"O'chirish",loading:"Yuklanmoqda…",
+ error:"Xatolik yuz berdi",required:"Maydonni to'ldiring",close:"Yopish",
+ age:"Yosh",fio:"F.I.SH.",fioPh:"Masalan: Aliyev Alisher Alisherovich",phone:"Telefon raqam",
+ role:"Kim sifatida kirasiz?",mentor:"Mentor",student:"O'quvchi",
+ mentorDesc:"To'garak ochaman, o'quvchi qabul qilaman",studentDesc:"To'garak qidiryapman",
+ mentorLock:"18 yoshdan kichiklar mentor bo'la olmaydi",studentLock:"O'quvchi 18 yoshgacha bo'ladi",
+ ageHint:"Yoshingizni kiriting — rolingiz shunga qarab aniqlanadi",
+ subjects:"Fanlar",chooseSubjects:"Qaysi fanlardan to'garagingiz bor?",picked:"tanlandi",
+ atLeastOne:"Kamida bitta fan tanlang",
+ welcomeT:"To'garakga qatnashmaysizmi?",
+ welcomeP:"Ustoz bilan yuzma-yuz ko'rishmasdan ariza topshiring. Ro'yxatdan o'tish 1 daqiqa.",
+ start:"Boshlash",
+ search:"Qidiruv",searchPh:"Mentor ismi yoki hudud",all:"Hammasi",open:"Ochiq",closed:"Yopiq",
+ found:"ta mentor topildi",noMentors:"Bu fandan hozircha mentor yo'q. Boshqa fanni tanlang.",
+ pickSubject:"Fanni tanlang",
+ profile:"Profil",edit:"Tahrirlash",experience:"Tajriba",years:"yil",about:"O'zim haqimda",
+ aboutPh:"Qayerda ishlayman, qanday natijalarga erishganman…",certs:"Sertifikatlar",
+ optional:"ixtiyoriy",addPhoto:"Rasm qo'shish",studentsNow:"Hozir tayyorlayotgan o'quvchilar",
+ days:"To'garak kunlari",time:"Vaqti",from:"dan",to:"gacha",location:"Manzil",
+ locPh:"Masalan: 12-maktab, 3-xona",duration:"Davomiyligi",min:"daqiqa",
+ openWork:"Qabul ochiq",openHint:"Yopiq bo'lsa o'quvchilar so'rov yubora olmaydi",
+ groups:"Guruhlar",myGroups:"Mening guruhlarim",newGroup:"Yangi guruh",groupTitle:"Guruh nomi",
+ limit:"O'rinlar",members:"o'quvchi",join:"So'rov yuborish",sent:"So'rov yuborildi",
+ joined:"Siz a'zosiz",full:"Joy qolmadi",noGroups:"Hali guruh yo'q",
+ noMyGroups:"Siz hali guruhga qo'shilmagansiz. Qidiruvdan to'garak toping.",
+ requests:"Xabarlar",noRequests:"Yangi so'rov yo'q",accept:"Kirsin",reject:"Kirmasin",
+ accepted:"Qabul qilindi",rejected:"Rad etildi",wants:"guruhiga qo'shilmoqchi",pending:"Kutilmoqda",
+ chats:"Suhbat",noChats:"Hali yozishmalar yo'q",msgPh:"Xabar yozing…",send:"Yuborish",write:"Yozish",
+ settings:"Sozlamalar",language:"Til",theme:"Ko'rinish",light:"Yorug'",dark:"Tungi",
+ admin:"Admin",adminPanel:"Admin panel",login:"Login",password:"Parol",signIn:"Kirish",
+ signOut:"Chiqish",badCreds:"Login yoki parol xato",blocked:"Bloklangan",block:"Bloklash",
+ unblock:"Blokdan olish",sure:"Rostdan ham o'chirilsinmi?",
+ sUsers:"Foydalanuvchi",sMentors:"Mentor",sStudents:"O'quvchi",sGroups:"Guruh",sReq:"So'rov",
+ sMsg:"Xabar",users:"Foydalanuvchilar",allGroups:"Barcha guruhlar",notSet:"kiritilmagan",
+ mentorAgeErr:"Mentor uchun kamida 18 yosh kerak",studentAgeErr:"O'quvchi 18 yoshgacha bo'lishi kerak",
+ dayNames:["Dushanba","Seshanba","Chorshanba","Payshanba","Juma","Shanba","Yakshanba"],
+ dayShort:["Du","Se","Ch","Pa","Ju","Sh","Ya"],
+ ai:"AI",aiTitle:"AI yordamchi",aiHint:"Istalgan savolni bering — men yordam beraman",
+ aiPh:"Savolingizni yozing…",aiThinking:"O'ylanmoqda…",aiUnavailable:"AI yordamchi hozircha ishlamayapti",
+ aiClear:"Suhbatni tozalash",
+ attendance:"Davomat",markAttendance:"Davomat belgilash",myAttendance:"Mening davomatim",
+ present:"Bor",absent:"Yo'q",attendanceSaved:"Davomat saqlandi",noAttendanceYet:"Hali davomat belgilanmagan",
+ attendanceHistory:"Tarix",attendanceToday:"Bugungi sana",totalLessons:"jami dars",
+ attendancePct:"davomat foizi",noMembers:"Guruhda a'zo yo'q"},
+
+cyr:{app:"Тўгаракка қатнашмайсизми",sub:"Тўгарак ва менторлар",next:"Давом этиш",back:"Орқага",
+ save:"Сақлаш",saved:"Сақланди",cancel:"Бекор қилиш",del:"Ўчириш",loading:"Юкланмоқда…",
+ error:"Хатолик юз берди",required:"Майдонни тўлдиринг",close:"Ёпиш",
+ age:"Ёш",fio:"Ф.И.Ш.",fioPh:"Масалан: Алиев Алишер Алишерович",phone:"Телефон рақам",
+ role:"Ким сифатида кирасиз?",mentor:"Ментор",student:"Ўқувчи",
+ mentorDesc:"Тўгарак очаман, ўқувчи қабул қиламан",studentDesc:"Тўгарак қидиряпман",
+ mentorLock:"18 ёшдан кичиклар ментор бўла олмайди",studentLock:"Ўқувчи 18 ёшгача бўлади",
+ ageHint:"Ёшингизни киритинг — ролингиз шунга қараб аниқланади",
+ subjects:"Фанлар",chooseSubjects:"Қайси фанлардан тўгарагингиз бор?",picked:"танланди",
+ atLeastOne:"Камида битта фан танланг",
+ welcomeT:"Тўгаракка қатнашмайсизми?",
+ welcomeP:"Устоз билан юзма-юз кўришмасдан ариза топширинг. Рўйхатдан ўтиш 1 дақиқа.",
+ start:"Бошлаш",
+ search:"Қидирув",searchPh:"Ментор исми ёки ҳудуд",all:"Ҳаммаси",open:"Очиқ",closed:"Ёпиқ",
+ found:"та ментор топилди",noMentors:"Бу фандан ҳозирча ментор йўқ. Бошқа фанни танланг.",
+ pickSubject:"Фанни танланг",
+ profile:"Профил",edit:"Таҳрирлаш",experience:"Тажриба",years:"йил",about:"Ўзим ҳақимда",
+ aboutPh:"Қаерда ишлайман, қандай натижаларга эришганман…",certs:"Сертификатлар",
+ optional:"ихтиёрий",addPhoto:"Расм қўшиш",studentsNow:"Ҳозир тайёрлаётган ўқувчилар",
+ days:"Тўгарак кунлари",time:"Вақти",from:"дан",to:"гача",location:"Манзил",
+ locPh:"Масалан: 12-мактаб, 3-хона",duration:"Давомийлиги",min:"дақиқа",
+ openWork:"Қабул очиқ",openHint:"Ёпиқ бўлса ўқувчилар сўров юбора олмайди",
+ groups:"Гуруҳлар",myGroups:"Менинг гуруҳларим",newGroup:"Янги гуруҳ",groupTitle:"Гуруҳ номи",
+ limit:"Ўринлар",members:"ўқувчи",join:"Сўров юбориш",sent:"Сўров юборилди",
+ joined:"Сиз аъзосиз",full:"Жой қолмади",noGroups:"Ҳали гуруҳ йўқ",
+ noMyGroups:"Сиз ҳали гуруҳга қўшилмагансиз. Қидирувдан тўгарак топинг.",
+ requests:"Хабарлар",noRequests:"Янги сўров йўқ",accept:"Кирсин",reject:"Кирмасин",
+ accepted:"Қабул қилинди",rejected:"Рад этилди",wants:"гуруҳига қўшилмоқчи",pending:"Кутилмоқда",
+ chats:"Суҳбат",noChats:"Ҳали ёзишмалар йўқ",msgPh:"Хабар ёзинг…",send:"Юбориш",write:"Ёзиш",
+ settings:"Созламалар",language:"Тил",theme:"Кўриниш",light:"Ёруғ",dark:"Тунги",
+ admin:"Админ",adminPanel:"Админ панел",login:"Логин",password:"Парол",signIn:"Кириш",
+ signOut:"Чиқиш",badCreds:"Логин ёки парол хато",blocked:"Блокланган",block:"Блоклаш",
+ unblock:"Блокдан олиш",sure:"Ростдан ҳам ўчирилсинми?",
+ sUsers:"Фойдаланувчи",sMentors:"Ментор",sStudents:"Ўқувчи",sGroups:"Гуруҳ",sReq:"Сўров",
+ sMsg:"Хабар",users:"Фойдаланувчилар",allGroups:"Барча гуруҳлар",notSet:"киритилмаган",
+ mentorAgeErr:"Ментор учун камида 18 ёш керак",studentAgeErr:"Ўқувчи 18 ёшгача бўлиши керак",
+ dayNames:["Душанба","Сешанба","Чоршанба","Пайшанба","Жума","Шанба","Якшанба"],
+ dayShort:["Ду","Се","Чо","Па","Жу","Ша","Як"],
+ ai:"АИ",aiTitle:"АИ ёрдамчи",aiHint:"Истаган саволни беринг — мен ёрдам бераман",
+ aiPh:"Саволингизни ёзинг…",aiThinking:"Ўйланмоқда…",aiUnavailable:"АИ ёрдамчи ҳозирча ишламаяпти",
+ aiClear:"Суҳбатни тозалаш",
+ attendance:"Давомат",markAttendance:"Давомат белгилаш",myAttendance:"Менинг давоматим",
+ present:"Бор",absent:"Йўқ",attendanceSaved:"Давомат сақланди",noAttendanceYet:"Ҳали давомат белгиланмаган",
+ attendanceHistory:"Тарих",attendanceToday:"Бугунги сана",totalLessons:"жами дарс",
+ attendancePct:"давомат фоизи",noMembers:"Гуруҳда аъзо йўқ"},
+
+ru:{app:"Не хотите на кружок?",sub:"Кружки и менторы",next:"Далее",back:"Назад",save:"Сохранить",
+ saved:"Сохранено",cancel:"Отмена",del:"Удалить",loading:"Загрузка…",error:"Произошла ошибка",
+ required:"Заполните поле",close:"Закрыть",
+ age:"Возраст",fio:"Ф.И.О.",fioPh:"Например: Алиев Алишер Алишерович",phone:"Номер телефона",
+ role:"Кто вы?",mentor:"Ментор",student:"Ученик",
+ mentorDesc:"Веду кружок и набираю учеников",studentDesc:"Ищу кружок",
+ mentorLock:"Ментором можно стать с 18 лет",studentLock:"Ученик — до 18 лет",
+ ageHint:"Укажите возраст — от него зависит доступная роль",
+ subjects:"Предметы",chooseSubjects:"По каким предметам у вас кружок?",picked:"выбрано",
+ atLeastOne:"Выберите хотя бы один предмет",
+ welcomeT:"Не хотите на кружок?",
+ welcomeP:"Подайте заявку, не встречаясь с преподавателем лично. Регистрация займёт минуту.",
+ start:"Начать",
+ search:"Поиск",searchPh:"Имя ментора или район",all:"Все",open:"Открыт",closed:"Закрыт",
+ found:"менторов найдено",noMentors:"По этому предмету пока нет менторов. Выберите другой.",
+ pickSubject:"Выберите предмет",
+ profile:"Профиль",edit:"Редактировать",experience:"Опыт",years:"лет",about:"О себе",
+ aboutPh:"Где работаю, каких результатов добился…",certs:"Сертификаты",
+ optional:"необязательно",addPhoto:"Добавить фото",studentsNow:"Учеников сейчас",
+ days:"Дни занятий",time:"Время",from:"с",to:"до",location:"Адрес",
+ locPh:"Например: школа №12, каб. 3",duration:"Длительность",min:"мин",
+ openWork:"Набор открыт",openHint:"Если закрыт, ученики не смогут отправить заявку",
+ groups:"Группы",myGroups:"Мои группы",newGroup:"Новая группа",groupTitle:"Название группы",
+ limit:"Мест",members:"учеников",join:"Отправить заявку",sent:"Заявка отправлена",
+ joined:"Вы в группе",full:"Мест нет",noGroups:"Групп пока нет",
+ noMyGroups:"Вы ещё не в группе. Найдите кружок через поиск.",
+ requests:"Заявки",noRequests:"Новых заявок нет",accept:"Принять",reject:"Отклонить",
+ accepted:"Принято",rejected:"Отклонено",wants:"хочет вступить в группу",pending:"Ожидает",
+ chats:"Чат",noChats:"Переписок пока нет",msgPh:"Напишите сообщение…",send:"Отправить",
+ write:"Написать",
+ settings:"Настройки",language:"Язык",theme:"Тема",light:"Светлая",dark:"Тёмная",
+ admin:"Админ",adminPanel:"Панель админа",login:"Логин",password:"Пароль",signIn:"Войти",
+ signOut:"Выйти",badCreds:"Неверный логин или пароль",blocked:"Заблокирован",block:"Заблокировать",
+ unblock:"Разблокировать",sure:"Действительно удалить?",
+ sUsers:"Пользователи",sMentors:"Менторы",sStudents:"Ученики",sGroups:"Группы",sReq:"Заявки",
+ sMsg:"Сообщения",users:"Пользователи",allGroups:"Все группы",notSet:"не указано",
+ mentorAgeErr:"Ментору нужно минимум 18 лет",studentAgeErr:"Ученику должно быть до 18 лет",
+ dayNames:["Понедельник","Вторник","Среда","Четверг","Пятница","Суббота","Воскресенье"],
+ dayShort:["Пн","Вт","Ср","Чт","Пт","Сб","Вс"],
+ ai:"ИИ",aiTitle:"ИИ помощник",aiHint:"Задайте любой вопрос — я помогу",
+ aiPh:"Напишите вопрос…",aiThinking:"Думаю…",aiUnavailable:"ИИ помощник сейчас недоступен",
+ aiClear:"Очистить чат",
+ attendance:"Посещаемость",markAttendance:"Отметить посещаемость",myAttendance:"Моя посещаемость",
+ present:"Был",absent:"Не был",attendanceSaved:"Посещаемость сохранена",noAttendanceYet:"Посещаемость ещё не отмечена",
+ attendanceHistory:"История",attendanceToday:"Сегодняшняя дата",totalLessons:"всего занятий",
+ attendancePct:"процент посещения",noMembers:"В группе нет участников"},
+
+en:{app:"Join a study club",sub:"Clubs and mentors",next:"Continue",back:"Back",save:"Save",
+ saved:"Saved",cancel:"Cancel",del:"Delete",loading:"Loading…",error:"Something went wrong",
+ required:"This field is required",close:"Close",
+ age:"Age",fio:"Full name",fioPh:"e.g. Aliyev Alisher Alisherovich",phone:"Phone number",
+ role:"How are you joining?",mentor:"Mentor",student:"Student",
+ mentorDesc:"I run clubs and accept students",studentDesc:"I'm looking for a club",
+ mentorLock:"Mentors must be 18 or older",studentLock:"Students are under 18",
+ ageHint:"Enter your age — it decides which role you can take",
+ subjects:"Subjects",chooseSubjects:"Which subjects do you teach?",picked:"selected",
+ atLeastOne:"Pick at least one subject",
+ welcomeT:"Join a study club",
+ welcomeP:"Apply without meeting the teacher in person. Signing up takes a minute.",
+ start:"Get started",
+ search:"Search",searchPh:"Mentor name or area",all:"All",open:"Open",closed:"Closed",
+ found:"mentors found",noMentors:"No mentors for this subject yet. Try another one.",
+ pickSubject:"Pick a subject",
+ profile:"Profile",edit:"Edit",experience:"Experience",years:"yrs",about:"About me",
+ aboutPh:"Where I teach, results my students have had…",certs:"Certificates",
+ optional:"optional",addPhoto:"Add photo",studentsNow:"Students right now",
+ days:"Club days",time:"Time",from:"from",to:"to",location:"Location",
+ locPh:"e.g. School 12, room 3",duration:"Duration",min:"min",
+ openWork:"Accepting students",openHint:"When closed, students can't send requests",
+ groups:"Groups",myGroups:"My groups",newGroup:"New group",groupTitle:"Group name",
+ limit:"Seats",members:"students",join:"Send request",sent:"Request sent",
+ joined:"You're a member",full:"No seats left",noGroups:"No groups yet",
+ noMyGroups:"You haven't joined a group yet. Find one in search.",
+ requests:"Requests",noRequests:"No new requests",accept:"Let in",reject:"Decline",
+ accepted:"Accepted",rejected:"Declined",wants:"wants to join",pending:"Waiting",
+ chats:"Chat",noChats:"No conversations yet",msgPh:"Write a message…",send:"Send",write:"Message",
+ settings:"Settings",language:"Language",theme:"Appearance",light:"Light",dark:"Dark",
+ admin:"Admin",adminPanel:"Admin panel",login:"Login",password:"Password",signIn:"Sign in",
+ signOut:"Sign out",badCreds:"Wrong login or password",blocked:"Blocked",block:"Block",
+ unblock:"Unblock",sure:"Delete for good?",
+ sUsers:"Users",sMentors:"Mentors",sStudents:"Students",sGroups:"Groups",sReq:"Requests",
+ sMsg:"Messages",users:"Users",allGroups:"All groups",notSet:"not set",
+ mentorAgeErr:"Mentors must be at least 18",studentAgeErr:"Students must be under 18",
+ dayNames:["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+ dayShort:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+ ai:"AI",aiTitle:"AI assistant",aiHint:"Ask anything — I'm here to help",
+ aiPh:"Type your question…",aiThinking:"Thinking…",aiUnavailable:"AI assistant is unavailable right now",
+ aiClear:"Clear chat",
+ attendance:"Attendance",markAttendance:"Mark attendance",myAttendance:"My attendance",
+ present:"Present",absent:"Absent",attendanceSaved:"Attendance saved",noAttendanceYet:"No attendance marked yet",
+ attendanceHistory:"History",attendanceToday:"Today's date",totalLessons:"total lessons",
+ attendancePct:"attendance rate",noMembers:"No members in this group"}
+};
+
+/* ========================== HOLAT ========================== */
+const tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
+const LS = window.localStorage;
+const S = {
+  lang: LS.getItem("lang") || "uz",
+  theme: LS.getItem("theme") || "dark",
+  me: null, screen: "search", subject: "", q: "", status: "all",
+  mentors: [], mentor: null, groups: [], requests: [], threads: [],
+  chat: null, messages: [], edit: null, adminToken: LS.getItem("adm") || "", adminData: null,
+  history: [], timer: null,
+  aiMessages: [], aiBusy: false,
+  attToday: null, attData: null
+};
+try { S.aiMessages = JSON.parse(LS.getItem("aiChat") || "[]"); } catch (e) { S.aiMessages = []; }
+let T = I18N[S.lang];
+const $ = (s, r) => (r || document).querySelector(s);
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const subName = (id) => (SUB_NAME[S.lang] || SUB_NAME.uz)[id] || id;
+const initials = (n) => String(n || "?").trim().split(/\s+/).slice(0,2).map(w=>w[0]).join("").toUpperCase();
+
+function avatar(u, cls) {
+  const c = "avatar " + (cls || "");
+  if (u && u.photo) return '<img class="' + c + '" src="' + esc(u.photo) + '" alt="">';
+  const name = u ? (u.name || u.tgName) : "?";
+  const col = SUB_COLOR[(u && u.subjects && u.subjects[0]) || "matematika"];
+  return '<div class="' + c + '" style="background:' + col + '">' + esc(initials(name)) + "</div>";
+}
+function toast(msg) {
+  const d = document.createElement("div");
+  d.className = "toast"; d.textContent = msg; document.body.appendChild(d);
+  setTimeout(() => d.remove(), 2200);
+}
+function haptic(type) { try { tg.HapticFeedback.impactOccurred(type || "light"); } catch (e) {} }
+
+/* ========================== API ========================== */
+function devId() {
+  let id = LS.getItem("devid");
+  if (!id) { id = String(900000 + Math.floor(Math.random() * 9000)); LS.setItem("devid", id); }
+  return id;
+}
+async function api(path, body, method) {
+  const headers = { "content-type": "application/json" };
+  if (tg && tg.initData) headers["x-init-data"] = tg.initData; else headers["x-dev-id"] = devId();
+  if (S.adminToken) headers["x-admin-token"] = S.adminToken;
+  const res = await fetch(path, {
+    method: method || (body ? "POST" : "GET"),
+    headers,
+    body: body ? JSON.stringify(body) : undefined
+  });
+  let data = {};
+  try { data = await res.json(); } catch (e) {}
+  if (!res.ok) { const err = new Error(data.error || "error"); err.code = data.error; throw err; }
+  return data;
+}
+
+/* ========================== KO'RINISH ========================== */
+function applyTheme() {
+  document.documentElement.dataset.theme = S.theme;
+  $("#btnTheme").textContent = S.theme === "dark" ? "☀️" : "🌙";
+  try { tg.setHeaderColor(S.theme === "dark" ? "#080B12" : "#F4F6FB"); } catch (e) {}
+}
+function setLang(l) {
+  S.lang = l; T = I18N[l]; LS.setItem("lang", l);
+  document.documentElement.lang = l === "cyr" ? "uz" : l;
+  api("/api/auth", { lang: l }).catch(() => {});
+  render();
+}
+
+/* ========================== NAVIGATSIYA ========================== */
+const NEEDS_BACK = { mentor: 1, chat: 1, admin: 1, "group-chat": 1 };
+
+async function go(screen, param) {
+  if (!NEEDS_BACK[screen]) S.history = [];
+  S.screen = screen; S.screenParam = param;
+  clearInterval(S.timer); S.timer = null;
+  try {
+    if (screen === "search") await loadMentors();
+    if (screen === "groups") S.groups = (await api("/api/groups?mine=1")).groups;
+    if (screen === "requests") S.requests = (await api("/api/requests")).requests;
+    if (screen === "chats") S.threads = (await api("/api/threads")).threads;
+    if (screen === "mentor") { const r = await api("/api/mentor/" + param); S.mentor = r.mentor; S.mentorGroups = r.groups; }
+    if (screen === "chat") { await loadChat(param); S.timer = setInterval(() => loadChat(param, true), 4000); }
+    if (screen === "group-chat") {
+      S.groupChatId = param;
+      // guruh ma'lumotini topamiz
+      const gList = (await api("/api/groups?mine=1")).groups;
+      S.groupChat = gList.find(g => g.id === param) || S.groupChat;
+      await loadGroupChat(param);
+      S.timer = setInterval(() => loadGroupChat(param, true), 4000);
+    }
+  } catch (e) { toast(errText(e)); }
+  render();
+  window.scrollTo(0, 0);
+}
+
+async function loadGroupChat(gId, silent) {
+  try {
+    const r = await api("/api/group-chat/" + gId);
+    S.groupChatMessages = r.messages;
+    S.groupChatPinned = r.pinned || null;
+    if (silent) {
+      const body = document.getElementById("gchatBody");
+      if (body) {
+        const isMentor = S.me.id === (S.groupChat && S.groupChat.mentorId);
+        body.innerHTML = groupChatBody(isMentor);
+        const t = document.getElementById("gcThread"); if (t) t.scrollIntoView({ block: "end" });
+      }
+    }
+  } catch (e) {}
+}
+function errText(e) {
+  const map = { mentor_age: T.mentorAgeErr, student_age: T.studentAgeErr, group_closed: T.closed,
+    group_full: T.full, blocked: T.blocked, bad_credentials: T.badCreds, ai_unavailable: T.aiUnavailable };
+  return map[e && e.code] || T.error;
+}
+async function loadMentors() {
+  const p = new URLSearchParams({ subject: S.subject, q: S.q, status: S.status });
+  S.mentors = (await api("/api/mentors?" + p)).mentors;
+}
+async function loadChat(peer, silent) {
+  const r = await api("/api/messages?peer=" + encodeURIComponent(peer));
+  S.chat = r.peer; S.messages = r.messages;
+  if (silent) { renderChatBody(); }
+}
+async function loadBadges() {
+  try {
+    const t = await api("/api/threads");
+    S.threads = t.threads;
+    S.unread = t.threads.reduce((a, x) => a + x.unread, 0);
+    if (S.me && S.me.role === "mentor") {
+      const r = await api("/api/requests");
+      S.requests = r.requests;
+      S.pending = r.requests.filter(x => x.status === "pending").length;
+    }
+    renderTabs();
+  } catch (e) {}
+}
+
+/* ========================== RENDER ========================== */
+function render() {
+  T = I18N[S.lang];
+  $("#hdTitle").textContent = T.app;
+  $("#hdSub").textContent = S.me && S.me.role ? (S.me.role === "mentor" ? T.mentor : T.student) : T.sub;
+  $("#btnBack").hidden = !NEEDS_BACK[S.screen];
+  const v = $("#view");
+  const R = { onboard: viewOnboard, search: viewSearch, mentor: viewMentor, groups: viewGroups,
+    requests: viewRequests, chats: viewChats, chat: viewChat, "group-chat": viewGroupChat,
+    profile: viewProfile, admin: viewAdmin, ai: viewAI };
+  v.innerHTML = (R[S.screen] || viewSearch)();
+  renderTabs();
+  if (S.screen === "chat") { const t = $("#thread"); if (t) t.scrollIntoView({ block: "end" }); }
+  if (S.screen === "group-chat") { const t = $("#gcThread"); if (t) t.scrollIntoView({ block: "end" }); }
+  if (S.screen === "ai") { const t = $("#aiThread"); if (t) t.scrollIntoView({ block: "end" }); }
+}
+function renderTabs() {
+  const bar = $("#tabbar");
+  if (!S.me || !S.me.role || S.screen === "onboard" || S.screen === "admin") { bar.hidden = true; return; }
+  bar.hidden = false;
+  const items = S.me.role === "mentor"
+    ? [["search","🔍",T.search],["groups","👥",T.groups],["requests","📨",T.requests],["ai","🤖",T.ai],["chats","💬",T.chats],["profile","👤",T.profile]]
+    : [["search","🔍",T.search],["groups","👥",T.groups],["ai","🤖",T.ai],["chats","💬",T.chats],["profile","👤",T.profile]];
+  $("#tabs").innerHTML = items.map(([id, ic, label]) => {
+    const dot = (id === "requests" && S.pending) || (id === "chats" && S.unread) ? '<span class="dot"></span>' : "";
+    return '<button class="tab ' + (S.screen === id ? "on" : "") + '" data-act="tab" data-val="' + id + '">' +
+      '<i>' + ic + '</i>' + dot + '<span>' + esc(label) + "</span></button>";
+  }).join("");
+}
+
+/* ---------- 1. RO'YXATDAN O'TISH ---------- */
+function viewOnboard() {
+  const ob = S.ob, step = ob.step;
+  if (step === 0) {
+    return '<div class="section">' +
+      '<div class="hero"><h1>' + esc(T.welcomeT) + "</h1><p>" + esc(T.welcomeP) + "</p></div>" +
+      '<div class="card"><div class="kv" style="flex-direction:column;align-items:flex-start;gap:8px">' +
+      "<span>🔍 " + esc(T.search) + " — " + esc(T.pickSubject).toLowerCase() + "</span>" +
+      "<span>📨 " + esc(T.join) + "</span><span>💬 " + esc(T.chats) + "</span></div></div>" +
+      '<button class="btn primary wide" data-act="ob-next">' + esc(T.start) + "</button></div>";
+  }
+  const bars = [1,2,3,4,5].map(i => '<i class="' + (i <= step ? "on" : "") + '"></i>').join("");
+  let inner = "";
+  if (step === 1) inner =
+    '<div class="field"><label>' + esc(T.age) + "</label>" +
+    '<input class="input" id="f-age" type="number" inputmode="numeric" min="5" max="99" value="' + esc(ob.age) + '" placeholder="15"></div>' +
+    '<p class="tiny muted">' + esc(T.ageHint) + "</p>";
+  if (step === 2) inner =
+    '<div class="field"><label>' + esc(T.fio) + "</label>" +
+    '<input class="input" id="f-name" value="' + esc(ob.name) + '" placeholder="' + esc(T.fioPh) + '"></div>';
+  if (step === 3) {
+    const age = +ob.age;
+    const mLock = age < 18, sLock = age > 18;
+    inner = '<div class="pick">' +
+      '<div class="opt ' + (ob.role === "mentor" ? "on" : "") + (mLock ? " lock" : "") + '" ' + (mLock ? "" : 'data-act="ob-role" data-val="mentor"') + '>' +
+      '<div class="em">🎓</div><div><b>' + esc(T.mentor) + "</b><div class=\"tiny muted\">" +
+      esc(mLock ? T.mentorLock : T.mentorDesc) + "</div></div></div>" +
+      '<div class="opt ' + (ob.role === "student" ? "on" : "") + (sLock ? " lock" : "") + '" ' + (sLock ? "" : 'data-act="ob-role" data-val="student"') + '>' +
+      '<div class="em">🎒</div><div><b>' + esc(T.student) + "</b><div class=\"tiny muted\">" +
+      esc(sLock ? T.studentLock : T.studentDesc) + "</div></div></div></div>";
+  }
+  if (step === 4) inner =
+    '<p class="tiny muted">' + esc(T.chooseSubjects) + " · " + ob.subjects.length + " " + esc(T.picked) + "</p>" +
+    '<div class="grid">' + SUBJECTS.map(id => tile(id, ob.subjects.includes(id), "ob-subject")).join("") + "</div>";
+  if (step === 5) inner =
+    '<div class="card" style="display:flex;gap:12px;align-items:center">' + avatar(S.me) +
+    "<div><b>" + esc(ob.name) + '</b><div class="tiny muted">' + esc(ob.age) + " " + esc(T.years) + " · " +
+    esc(ob.role === "mentor" ? T.mentor : T.student) + "</div></div></div>" +
+    '<div class="field"><label>' + esc(T.phone) + "</label>" +
+    '<input class="input" id="f-phone" type="tel" inputmode="tel" value="' + esc(ob.phone || "+998") + '"></div>';
+
+  const title = [, T.age, T.fio, T.role, T.subjects, T.phone][step];
+  return '<div class="section"><div class="steps">' + bars + "</div><h2>" + esc(title) + "</h2>" + inner +
+    '<div class="two" style="margin-top:6px">' +
+    '<button class="btn" data-act="ob-back">' + esc(T.back) + "</button>" +
+    '<button class="btn primary" data-act="ob-next">' + esc(step === 5 ? T.save : T.next) + "</button></div></div>";
+}
+function tile(id, on, act) {
+  return '<button class="tile ' + (on ? "on" : "") + '" style="--tc:' + SUB_COLOR[id] + '" data-mark="' +
+    esc(subName(id)[0]) + '" data-act="' + act + '" data-val="' + id + '">' + esc(subName(id)) + "</button>";
+}
+
+/* ---------- 2. QIDIRUV ---------- */
+function viewSearch() {
+  const chips = [["all", T.all], ["open", T.open], ["closed", T.closed]].map(([v, l]) =>
+    '<button class="chip ' + (S.status === v ? "on" : "") + '" data-act="status" data-val="' + v + '">' + esc(l) + "</button>").join("");
+  let head =
+    '<input class="input" id="q" placeholder="' + esc(T.searchPh) + '" value="' + esc(S.q) + '">' +
+    '<div class="chips">' + chips + "</div>";
+  if (!S.subject) {
+    return '<div class="section">' + head + "<h2>" + esc(T.pickSubject) + "</h2>" +
+      '<div class="grid">' + SUBJECTS.map(id => tile(id, false, "subject")).join("") + "</div></div>";
+  }
+  const list = S.mentors.length
+    ? S.mentors.map(mentorCard).join("")
+    : '<div class="empty"><div class="big">🔎</div>' + esc(T.noMentors) + "</div>";
+  return '<div class="section">' + head +
+    '<div class="rowline"><h2 style="color:' + SUB_COLOR[S.subject] + '">' + esc(subName(S.subject)) + "</h2>" +
+    '<button class="btn sm" data-act="subject" data-val="">✕ ' + esc(T.all) + "</button></div>" +
+    '<p class="tiny muted">' + S.mentors.length + " " + esc(T.found) + "</p>" +
+    '<div class="list">' + list + "</div></div>";
+}
+function mentorCard(m) {
+  const col = SUB_COLOR[m.subjects[0]] || "#8B6BFF";
+  return '<div class="card spine" style="--accent:' + col + '" data-act="mentor" data-val="' + m.id + '">' +
+    '<div style="display:flex;gap:11px;align-items:flex-start">' + avatar(m) +
+    '<div style="flex:1;min-width:0"><div class="rowline"><b>' + esc(m.name) + "</b>" +
+    '<span class="badge ' + (m.open ? "open" : "closed") + '">' + esc(m.open ? T.open : T.closed) + "</span></div>" +
+    '<div class="chips" style="margin:6px 0">' + m.subjects.slice(0, 3).map(s =>
+      '<span class="chip" style="padding:4px 9px;font-size:11.5px"><span class="pt" style="background:' +
+      SUB_COLOR[s] + '"></span>' + esc(subName(s)) + "</span>").join("") +
+    (m.subjects.length > 3 ? '<span class="chip" style="padding:4px 9px;font-size:11.5px">+' + (m.subjects.length - 3) + "</span>" : "") +
+    '</div><div class="kv tiny"><span>🏅 ' + m.experience + " " + esc(T.years) + "</span>" +
+    "<span>👥 " + m.studentsNow + "</span>" + (m.location ? "<span>📍 " + esc(m.location) + "</span>" : "") +
+    (m.days.length ? "<span>📅 " + daysText(m.days) + "</span>" : "") + "</div></div></div></div>";
+}
+const daysText = (a) => (a && a.length) ? a.slice().sort((x, y) => x - y).map(d => T.dayShort[d]).join(", ") : T.notSet;
+const timeText = (f, t) => (f && t) ? f + "–" + t : T.notSet;
+
+/* ---------- 3. MENTOR SAHIFASI ---------- */
+function viewMentor() {
+  const m = S.mentor; if (!m) return '<div class="loader">' + esc(T.loading) + "</div>";
+  const groups = (S.mentorGroups || []).map(groupCard).join("") ||
+    '<p class="tiny muted">' + esc(T.noGroups) + "</p>";
+  return '<div class="section">' +
+    '<div class="card" style="display:flex;gap:13px;align-items:center">' + avatar(m, "lg") +
+    '<div style="flex:1"><h2>' + esc(m.name) + "</h2>" +
+    '<div class="kv tiny" style="margin-top:4px"><span class="badge ' + (m.open ? "open" : "closed") + '">' +
+    esc(m.open ? T.open : T.closed) + "</span><span>🏅 " + m.experience + " " + esc(T.years) + "</span>" +
+    "<span>👥 " + m.studentsNow + "</span></div></div></div>" +
+    '<div class="chips">' + m.subjects.map(s =>
+      '<span class="chip on" style="background:' + SUB_COLOR[s] + '">' + esc(subName(s)) + "</span>").join("") + "</div>" +
+    (m.bio ? '<div class="card"><label class="tiny muted">' + esc(T.about) + "</label><p style=\"margin-top:5px\">" + esc(m.bio) + "</p></div>" : "") +
+    '<div class="card"><div class="kv" style="flex-direction:column;align-items:flex-start;gap:7px">' +
+    "<span>📅 " + esc(T.days) + ": <b>" + daysText(m.days) + "</b></span>" +
+    "<span>🕒 " + esc(T.time) + ": <b>" + timeText(m.timeFrom, m.timeTo) + "</b></span>" +
+    "<span>📍 " + esc(T.location) + ": <b>" + esc(m.location || T.notSet) + "</b></span></div></div>" +
+    (m.certs && m.certs.length ? '<div class="card"><label class="tiny muted">' + esc(T.certs) + "</label>" +
+      '<div class="certs" style="margin-top:8px">' + m.certs.map(c => '<img src="' + esc(c) + '" alt="">').join("") + "</div></div>" : "") +
+    "<h2>" + esc(T.groups) + '</h2><div class="list">' + groups + "</div>" +
+    '<button class="btn primary wide" data-act="write" data-val="' + m.id + '">💬 ' + esc(T.write) + "</button></div>";
+}
+function groupCard(g, mine) {
+  const col = SUB_COLOR[g.subject] || "#8B6BFF";
+  let action = "";
+  if (mine) {
+    action = '<div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">' +
+      '<button class="btn primary sm wide" data-act="group-chat" data-val="' + g.id + '">💬 Guruh chati</button>' +
+      '<button class="btn go sm wide" data-act="attendance" data-val="' + g.id + '">📋 ' + esc(T.markAttendance) + "</button>" +
+      '<div class="two">' +
+      '<button class="btn sm" data-act="edit-group" data-val="' + g.id + '">' + esc(T.edit) + "</button>" +
+      '<button class="btn sm danger" data-act="del-group" data-val="' + g.id + '">' + esc(T.del) + "</button></div></div>";
+  } else if (S.me && S.me.role === "student") {
+    if (g.joined) action =
+      '<div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">' +
+      '<button class="btn primary sm wide" data-act="group-chat" data-val="' + g.id + '">💬 Guruh chati</button>' +
+      '<button class="btn sm wide" data-act="my-attendance" data-val="' + g.id + '">📊 ' + esc(T.myAttendance) + "</button>" +
+      '<span class="badge open" style="display:inline-block;text-align:center">✓ ' + esc(T.joined) + "</span></div>";
+    else if (g.pending) action = '<span class="badge soft" style="margin-top:9px;display:inline-block">⏳ ' + esc(T.sent) + "</span>";
+    else if (!g.open) action = '<span class="badge closed" style="margin-top:9px;display:inline-block">' + esc(T.closed) + "</span>";
+    // limit yo'q — cheksiz
+    else action = '<button class="btn go sm wide" style="margin-top:10px" data-act="join" data-val="' + g.id + '">' + esc(T.join) + "</button>";
+  }
+  return '<div class="card spine" style="--accent:' + col + '">' +
+    '<div class="rowline"><b>' + esc(g.title) + "</b>" +
+    '<span class="badge soft">👥 ' + g.members.length + "</span></div>" +
+    '<div class="chips" style="margin:6px 0"><span class="chip" style="padding:4px 9px;font-size:11.5px">' +
+    '<span class="pt" style="background:' + col + '"></span>' + esc(subName(g.subject)) + "</span></div>" +
+    '<div class="kv tiny"><span>📅 ' + daysText(g.days) + "</span><span>🕒 " + timeText(g.timeFrom, g.timeTo) + "</span>" +
+    "<span>⏳ " + g.duration + " " + esc(T.min) + "</span>" + (g.location ? "<span>📍 " + esc(g.location) + "</span>" : "") + "</div>" +
+    (g.mentorName && !mine ? '<div class="tiny muted" style="margin-top:6px">🎓 ' + esc(g.mentorName) + "</div>" : "") + action + "</div>";
+}
+
+/* ---------- 4. GURUHLAR ---------- */
+function viewGroups() {
+  const mentor = S.me.role === "mentor";
+  const list = S.groups.length
+    ? S.groups.map(g => groupCard(g, mentor)).join("")
+    : '<div class="empty"><div class="big">👥</div>' + esc(mentor ? T.noGroups : T.noMyGroups) + "</div>";
+  return '<div class="section"><div class="rowline"><h2>' + esc(T.myGroups) + "</h2>" +
+    (mentor ? '<button class="btn primary sm" data-act="new-group">+ ' + esc(T.newGroup) + "</button>" : "") +
+    '</div><div class="list">' + list + "</div></div>";
+}
+
+/* ---------- 5. SO'ROVLAR (mentorga) ---------- */
+function viewRequests() {
+  if (!S.requests.length) return '<div class="empty"><div class="big">📭</div>' + esc(T.noRequests) + "</div>";
+  return '<div class="section"><h2>' + esc(T.requests) + '</h2><div class="list">' +
+    S.requests.map(r => {
+      const s = r.student || {};
+      const badge = r.status === "pending" ? '<span class="badge soft">⏳ ' + esc(T.pending) + "</span>"
+        : r.status === "accepted" ? '<span class="badge open">✓ ' + esc(T.accepted) + "</span>"
+        : '<span class="badge closed">✕ ' + esc(T.rejected) + "</span>";
+      const actions = r.status === "pending"
+        ? '<div class="two" style="margin-top:11px">' +
+          '<button class="btn go sm" data-act="decide" data-val="' + r.id + ':1">✓ ' + esc(T.accept) + "</button>" +
+          '<button class="btn danger sm" data-act="decide" data-val="' + r.id + ':0">✕ ' + esc(T.reject) + "</button></div>"
+        : '<button class="btn sm wide" style="margin-top:10px" data-act="write" data-val="' + s.id + '">💬 ' + esc(T.write) + "</button>";
+      return '<div class="card"><div style="display:flex;gap:11px">' + avatar(s, "sm") +
+        '<div style="flex:1;min-width:0"><div class="rowline"><b>' + esc(s.name || "—") + "</b>" + badge + "</div>" +
+        '<div class="tiny muted">' + esc(s.age || "") + " " + esc(T.years) + " · " + esc(r.groupTitle) + " " + esc(T.wants) + "</div>" +
+        (s.phone ? '<div class="tiny" style="margin-top:3px">📞 ' + esc(s.phone) + "</div>" : "") +
+        (r.note ? '<div class="tiny muted" style="margin-top:3px">“' + esc(r.note) + "”</div>" : "") +
+        "</div></div>" + actions + "</div>";
+    }).join("") + "</div></div>";
+}
+
+/* ---------- 6b. GURUH CHATI ---------- */
+function viewGroupChat() {
+  const g = S.groupChat; if (!g) return '<div class="loader">' + esc(T.loading) + "</div>";
+  const isMentor = S.me.id === g.mentorId;
+  const pinned = S.groupChatPinned;
+  return '<div class="section">' +
+    (pinned
+      ? '<div class="gchat-pin"><span class="pin-ico">📌</span><div style="flex:1;min-width:0">' +
+        '<div class="tiny muted" style="margin-bottom:2px">Pinlangan xabar</div>' +
+        (pinned.image ? '<img src="' + esc(pinned.image) + '" style="max-width:140px;border-radius:8px;margin-bottom:3px">' : '') +
+        (pinned.text ? esc(pinned.text) : '') + '</div>' +
+        (isMentor ? '<button class="pin-btn" data-act="gc-unpin" title="Pinni olib tashlash">✕</button>' : '') +
+        '</div>'
+      : '') +
+    '<div id="gchatBody">' + groupChatBody(isMentor) + "</div>" +
+    '<div class="composer">' +
+    '<label class="img-btn" title="Rasm yuborish">📷<input type="file" accept="image/*" id="gcImgInput" style="display:none" onchange="gcPickImg()"></label>' +
+    '<input class="input" id="gcMsg" placeholder="Xabar yozing…" autocomplete="off">' +
+    '<button class="btn primary sm" data-act="gc-send">➤</button></div>' +
+    '<div class="img-preview hide" id="imgPreview" onclick="this.classList.add(\'hide\')"><img id="imgPreviewImg" src="" alt=""></div>' +
+    "</div>";
+}
+function groupChatBody(isMentor) {
+  const msgs = S.groupChatMessages || [];
+  if (!msgs.length) return '<div class="empty tiny">Hali xabar yo\'q. Birinchi bo\'lib yozing!</div>';
+  return '<div class="thread" id="gcThread">' + msgs.map(m => {
+    const mine = m.from === S.me.id;
+    const av = m.photo
+      ? '<img src="' + esc(m.photo) + '" style="width:26px;height:26px;border-radius:8px;object-fit:cover;flex:none">'
+      : '<div class="avatar sm" style="width:26px;height:26px;border-radius:8px;font-size:11px">' + esc((m.name||"?")[0]) + '</div>';
+    const pinBtn = isMentor && !mine
+      ? '<button class="pin-btn" data-act="gc-pin" data-val="' + m.id + '">📌 Pin</button>' : '';
+    const myPinBtn = isMentor && mine
+      ? '<button class="pin-btn" data-act="gc-pin" data-val="' + m.id + '">📌 Pin</button>' : '';
+    return '<div style="display:flex;align-items:flex-end;gap:5px;' + (mine ? "flex-direction:row-reverse" : "") + '">' +
+      (!mine ? av : '') +
+      '<div class="bubble ' + (mine ? "me" : "them") + '" style="max-width:78%">' +
+      (!mine ? '<div class="tiny" style="font-weight:700;margin-bottom:3px;opacity:.8">' + esc(m.name) + '</div>' : '') +
+      (m.image ? '<img src="' + esc(m.image) + '" onclick="showImgPreview(this.src)" alt="rasm">' : '') +
+      (m.text ? '<div>' + esc(m.text) + '</div>' : '') +
+      '<time>' + fmtTime(m.at) + (m.pinned ? ' 📌' : '') + '</time>' +
+      (mine ? myPinBtn : pinBtn) +
+      '</div></div>';
+  }).join("") + "</div>";
+}
+function gcPickImg() {
+  const inp = document.getElementById("gcImgInput");
+  const f = inp && inp.files[0]; if (!f) return;
+  shrink(f).then(data => { S.gcPendingImg = data; toast("Rasm tayyor — yuborish uchun ➤ ni bosing"); }).catch(() => toast(T.error));
+  inp.value = "";
+}
+function showImgPreview(src) {
+  const el = document.getElementById("imgPreview");
+  const img = document.getElementById("imgPreviewImg");
+  if (el && img) { img.src = src; el.classList.remove("hide"); }
+}
+
+/* ---------- 6. SUHBAT ---------- */
+function viewChats() {
+  if (!S.threads.length) return '<div class="empty"><div class="big">💬</div>' + esc(T.noChats) + "</div>";
+  return '<div class="section"><h2>' + esc(T.chats) + '</h2><div class="list">' +
+    S.threads.map(t => '<div class="card" data-act="write" data-val="' + t.peerId + '" style="display:flex;gap:11px;align-items:center">' +
+      avatar(t, "sm") + '<div style="flex:1;min-width:0"><div class="rowline"><b>' + esc(t.name) + "</b>" +
+      (t.unread ? '<span class="badge open">' + t.unread + "</span>" : '<span class="tiny muted">' + fmtTime(t.last.at) + "</span>") +
+      '</div><div class="tiny muted" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' +
+      (t.last.mine ? "↩ " : "") + esc(t.last.text) + "</div></div></div>").join("") + "</div></div>";
+}
+function viewChat() {
+  const p = S.chat || {};
+  return '<div class="section">' +
+    '<div class="card" style="display:flex;gap:11px;align-items:center">' + avatar(p, "sm") +
+    "<div><b>" + esc(p.name || "") + '</b><div class="tiny muted">' + esc(p.role === "mentor" ? T.mentor : T.student) + "</div></div></div>" +
+    '<div id="chatBody">' + chatBody() + "</div>" +
+    '<div class="composer"><input class="input" id="msg" placeholder="' + esc(T.msgPh) + '" autocomplete="off">' +
+    '<button class="btn primary sm" data-act="send">➤</button></div></div>';
+}
+function chatBody() {
+  if (!S.messages.length) return '<div class="empty tiny">' + esc(T.noChats) + "</div>";
+  return '<div class="thread" id="thread">' + S.messages.map(m =>
+    '<div class="bubble ' + (m.from === S.me.id ? "me" : "them") + '">' + esc(m.text) +
+    "<time>" + fmtTime(m.at) + "</time></div>").join("") + "</div>";
+}
+function renderChatBody() { const b = $("#chatBody"); if (b) { b.innerHTML = chatBody(); const t = $("#thread"); if (t) t.scrollIntoView({ block: "end" }); } }
+function fmtTime(ts) {
+  const d = new Date(ts), n = new Date();
+  const hm = String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
+  return d.toDateString() === n.toDateString() ? hm : d.getDate() + "." + (d.getMonth() + 1) + " " + hm;
+}
+function todayStr() {
+  const d = new Date();
+  return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+}
+
+/* ---------- 6c. AI YORDAMCHI ---------- */
+function viewAI() {
+  const has = S.aiMessages.length > 0;
+  return '<div class="section">' +
+    '<div class="rowline"><h2>🤖 ' + esc(T.aiTitle) + "</h2>" +
+    (has ? '<button class="btn sm" data-act="ai-clear">🗑 ' + esc(T.aiClear) + "</button>" : "") + "</div>" +
+    '<div id="aiBody">' + aiBody() + "</div>" +
+    '<div class="composer">' +
+    '<input class="input" id="aiMsg" placeholder="' + esc(T.aiPh) + '" autocomplete="off"' + (S.aiBusy ? " disabled" : "") + '>' +
+    '<button class="btn primary sm" data-act="ai-send"' + (S.aiBusy ? " disabled" : "") + '>➤</button></div></div>';
+}
+function aiBody() {
+  if (!S.aiMessages.length && !S.aiBusy) {
+    return '<div class="empty"><div class="big">🤖</div>' + esc(T.aiHint) + "</div>";
+  }
+  const bubbles = S.aiMessages.map((m) =>
+    '<div class="bubble ' + (m.role === "user" ? "me" : "them") + '">' + esc(m.text) + "</div>"
+  ).join("");
+  const thinking = S.aiBusy
+    ? '<div class="bubble them"><span class="tiny muted">' + esc(T.aiThinking) + "</span></div>" : "";
+  return '<div class="thread" id="aiThread">' + bubbles + thinking + "</div>";
+}
+function renderAiBody() {
+  const b = $("#aiBody");
+  if (b) { b.innerHTML = aiBody(); const t = $("#aiThread"); if (t) t.scrollIntoView({ block: "end" }); }
+}
+function saveAiHistory() {
+  try { LS.setItem("aiChat", JSON.stringify(S.aiMessages.slice(-60))); } catch (e) {}
+}
+
+/* ---------- 7. PROFIL ---------- */
+function viewProfile() {
+  const m = S.me, mentor = m.role === "mentor";
+  return '<div class="section">' +
+    '<div class="card" style="display:flex;gap:13px;align-items:center">' + avatar(m, "lg") +
+    '<div style="flex:1"><h2>' + esc(m.name) + "</h2>" +
+    '<div class="tiny muted">' + esc(mentor ? T.mentor : T.student) + " · " + m.age + " " + esc(T.years) + "</div>" +
+    (m.username ? '<div class="tiny muted">@' + esc(m.username) + "</div>" : "") + "</div></div>" +
+    '<div class="card"><div class="kv" style="flex-direction:column;align-items:flex-start;gap:7px">' +
+    "<span>📞 <b>" + esc(m.phone || T.notSet) + "</b></span>" +
+    (mentor ? "<span>🏅 " + esc(T.experience) + ": <b>" + m.experience + " " + esc(T.years) + "</b></span>" +
+      "<span>👥 " + esc(T.studentsNow) + ": <b>" + m.studentsNow + "</b></span>" +
+      "<span>📅 " + daysText(m.days) + " · 🕒 " + timeText(m.timeFrom, m.timeTo) + "</span>" +
+      "<span>📍 " + esc(m.location || T.notSet) + "</span>" : "") + "</div></div>" +
+    (mentor ? '<div class="chips">' + (m.subjects.length ? m.subjects.map(s =>
+      '<span class="chip on" style="background:' + SUB_COLOR[s] + '">' + esc(subName(s)) + "</span>").join("")
+      : '<span class="tiny muted">' + esc(T.notSet) + "</span>") + "</div>" : "") +
+    (mentor && m.bio ? '<div class="card"><label class="tiny muted">' + esc(T.about) + "</label><p style=\"margin-top:5px\">" + esc(m.bio) + "</p></div>" : "") +
+    (mentor && m.certs.length ? '<div class="card"><label class="tiny muted">' + esc(T.certs) + '</label><div class="certs" style="margin-top:8px">' +
+      m.certs.map(c => '<img src="' + esc(c) + '" alt="">').join("") + "</div></div>" : "") +
+    (mentor ? '<button class="btn wide ' + (m.open ? "" : "go") + '" data-act="toggle-open">' +
+      (m.open ? "🔒 " + esc(T.closed) : "🔓 " + esc(T.open)) + "</button>" : "") +
+    '<button class="btn primary wide" data-act="edit-profile">✎ ' + esc(T.edit) + "</button>" +
+    '<button class="btn wide" data-act="settings">⚙️ ' + esc(T.settings) + "</button></div>";
+}
+
+/* ---------- 8. ADMIN ---------- */
+function viewAdmin() {
+  if (!S.adminData) {
+    return '<div class="section"><h2>' + esc(T.adminPanel) + "</h2>" +
+      '<div class="card"><div class="field"><label>' + esc(T.login) + '</label><input class="input" id="a-login"></div>' +
+      '<div class="field" style="margin-top:10px"><label>' + esc(T.password) + '</label><input class="input" id="a-pass" type="password"></div>' +
+      '<button class="btn primary wide" style="margin-top:12px" data-act="admin-login">' + esc(T.signIn) + "</button></div></div>";
+  }
+  const d = S.adminData;
+  const st = [["sUsers", d.stats.users], ["sMentors", d.stats.mentors], ["sStudents", d.stats.students],
+    ["sGroups", d.stats.groups], ["sReq", d.stats.requests], ["sMsg", d.stats.messages]];
+  return '<div class="section"><div class="rowline"><h2>' + esc(T.adminPanel) + "</h2>" +
+    '<button class="btn sm danger" data-act="admin-out">' + esc(T.signOut) + "</button></div>" +
+    '<div class="stat">' + st.map(([k, v]) => "<div><b>" + v + "</b><span>" + esc(T[k]) + "</span></div>").join("") + "</div>" +
+    "<h3>" + esc(T.users) + '</h3><div class="list">' + d.users.map(u =>
+      '<div class="card"><div style="display:flex;gap:10px;align-items:center">' + avatar(u, "sm") +
+      '<div style="flex:1;min-width:0"><div class="rowline"><b>' + esc(u.name || "—") + "</b>" +
+      '<span class="badge ' + (u.blocked ? "closed" : "soft") + '">' + esc(u.blocked ? T.blocked : (u.role === "mentor" ? T.mentor : T.student)) + "</span></div>" +
+      '<div class="tiny muted">' + esc(u.age) + " " + esc(T.years) + " · " + esc(u.phone || T.notSet) +
+      (u.username ? " · @" + esc(u.username) : "") + "</div>" +
+      (u.subjects && u.subjects.length ? '<div class="tiny muted">' + u.subjects.map(subName).join(", ") + "</div>" : "") +
+      '</div></div><div class="two" style="margin-top:9px">' +
+      '<button class="btn sm" data-act="admin-user" data-val="' + u.id + ":" + (u.blocked ? "unblock" : "block") + '">' +
+      esc(u.blocked ? T.unblock : T.block) + "</button>" +
+      '<button class="btn sm danger" data-act="admin-user" data-val="' + u.id + ':delete">' + esc(T.del) + "</button></div></div>").join("") + "</div>" +
+    "<h3>" + esc(T.allGroups) + '</h3><div class="list">' + (d.groups.length ? d.groups.map(g =>
+      '<div class="card spine" style="--accent:' + (SUB_COLOR[g.subject] || "#8B6BFF") + '">' +
+      '<div class="rowline"><b>' + esc(g.title) + '</b><span class="badge soft">' + g.members.length + "/" + g.limit + "</span></div>" +
+      '<div class="tiny muted">' + esc(subName(g.subject)) + " · 🎓 " + esc(g.mentorName) + " · 📍 " + esc(g.location || T.notSet) + "</div>" +
+      '<button class="btn sm danger wide" style="margin-top:9px" data-act="admin-group" data-val="' + g.id + '">' + esc(T.del) + "</button></div>").join("")
+      : '<p class="tiny muted">' + esc(T.noGroups) + "</p>") + "</div></div>";
+}
+
+/* ========================== PASTKI OYNALAR ========================== */
+function openSheet(html) {
+  $("#sheet").innerHTML = '<div class="grab"></div>' + html;
+  $("#sheetBg").classList.add("on");
+}
+function closeSheet() { $("#sheetBg").classList.remove("on"); }
+
+function sheetSettings() {
+  const langs = [["uz", "O'zbekcha"], ["cyr", "Ўзбекча"], ["ru", "Русский"], ["en", "English"]];
+  openSheet("<h2>" + esc(T.settings) + "</h2>" +
+    '<div class="field" style="margin-top:14px"><label>' + esc(T.language) + '</label><div class="chips">' +
+    langs.map(([v, l]) => '<button class="chip ' + (S.lang === v ? "on" : "") + '" data-act="lang" data-val="' + v + '">' + esc(l) + "</button>").join("") +
+    '</div></div><div class="field" style="margin-top:14px"><label>' + esc(T.theme) + '</label><div class="chips">' +
+    '<button class="chip ' + (S.theme === "light" ? "on" : "") + '" data-act="theme-set" data-val="light">☀️ ' + esc(T.light) + "</button>" +
+    '<button class="chip ' + (S.theme === "dark" ? "on" : "") + '" data-act="theme-set" data-val="dark">🌙 ' + esc(T.dark) + "</button>" +
+    '</div></div><div class="sep" style="margin:16px 0"></div>' +
+    '<button class="btn wide" data-act="admin">🛡 ' + esc(T.adminPanel) + "</button>" +
+    '<button class="btn wide" style="margin-top:8px" data-act="close-sheet">' + esc(T.close) + "</button>");
+}
+
+/* --- profilni tahrirlash --- */
+function sheetProfile() {
+  const m = S.me;
+  S.edit = {
+    name: m.name, age: m.age, phone: m.phone, subjects: (m.subjects || []).slice(),
+    bio: m.bio, experience: m.experience, studentsNow: m.studentsNow, days: (m.days || []).slice(),
+    timeFrom: m.timeFrom, timeTo: m.timeTo, location: m.location, certs: (m.certs || []).slice()
+  };
+  drawProfileSheet();
+}
+function drawProfileSheet() {
+  const e = S.edit, mentor = S.me.role === "mentor";
+  let html = "<h2>" + esc(T.edit) + "</h2>" +
+    '<div class="field" style="margin-top:12px"><label>' + esc(T.fio) + '</label><input class="input" id="e-name" value="' + esc(e.name) + '"></div>' +
+    '<div class="two" style="margin-top:10px">' +
+    '<div class="field"><label>' + esc(T.age) + '</label><input class="input" id="e-age" type="number" value="' + esc(e.age) + '"></div>' +
+    '<div class="field"><label>' + esc(T.phone) + '</label><input class="input" id="e-phone" type="tel" value="' + esc(e.phone) + '"></div></div>';
+  if (mentor) {
+    html += '<div class="field" style="margin-top:14px"><label>' + esc(T.subjects) + " · " + e.subjects.length + " " + esc(T.picked) + "</label>" +
+      '<div class="grid">' + SUBJECTS.map(id => tile(id, e.subjects.includes(id), "e-subject")).join("") + "</div></div>" +
+      '<div class="two" style="margin-top:12px">' +
+      '<div class="field"><label>' + esc(T.experience) + " (" + esc(T.years) + ')</label><input class="input" id="e-exp" type="number" value="' + esc(e.experience) + '"></div>' +
+      '<div class="field"><label>' + esc(T.studentsNow) + '</label><input class="input" id="e-stud" type="number" value="' + esc(e.studentsNow) + '"></div></div>' +
+      '<div class="field" style="margin-top:12px"><label>' + esc(T.about) + '</label><textarea id="e-bio" placeholder="' + esc(T.aboutPh) + '">' + esc(e.bio) + "</textarea></div>" +
+      '<div class="field" style="margin-top:12px"><label>' + esc(T.days) + '</label><div class="chips">' +
+      T.dayShort.map((d, i) => '<button class="chip ' + (e.days.includes(i) ? "on" : "") + '" data-act="e-day" data-val="' + i + '">' + esc(d) + "</button>").join("") + "</div></div>" +
+      '<div class="two" style="margin-top:12px">' +
+      '<div class="field"><label>' + esc(T.time) + " " + esc(T.from) + '</label><input class="input" id="e-from" type="time" value="' + esc(e.timeFrom) + '"></div>' +
+      '<div class="field"><label>' + esc(T.time) + " " + esc(T.to) + '</label><input class="input" id="e-to" type="time" value="' + esc(e.timeTo) + '"></div></div>' +
+      '<div class="field" style="margin-top:12px"><label>' + esc(T.location) + '</label><input class="input" id="e-loc" value="' + esc(e.location) + '" placeholder="' + esc(T.locPh) + '"></div>' +
+      '<div class="field" style="margin-top:14px"><label>' + esc(T.certs) + " · " + esc(T.optional) + "</label>" +
+      '<div class="certs">' + e.certs.map((c, i) => '<div><img src="' + esc(c) + '" alt=""><button class="del" data-act="e-cert-del" data-val="' + i + '">✕</button></div>').join("") +
+      (e.certs.length < 6 ? '<button class="btn sm" data-act="e-cert-add" style="height:78px;width:78px">+</button>' : "") + "</div></div>";
+  }
+  html += '<div class="two" style="margin-top:16px">' +
+    '<button class="btn" data-act="close-sheet">' + esc(T.cancel) + "</button>" +
+    '<button class="btn primary" data-act="save-profile">' + esc(T.save) + "</button></div>";
+  openSheet(html);
+}
+function grabProfile() {
+  const g = (id) => { const el = $("#" + id); return el ? el.value : ""; };
+  const e = S.edit;
+  e.name = g("e-name"); e.age = g("e-age"); e.phone = g("e-phone");
+  if (S.me.role === "mentor") {
+    e.experience = g("e-exp"); e.studentsNow = g("e-stud"); e.bio = g("e-bio");
+    e.timeFrom = g("e-from"); e.timeTo = g("e-to"); e.location = g("e-loc");
+  }
+}
+
+/* --- guruh formasi --- */
+function sheetGroup(g) {
+  S.gedit = g ? Object.assign({}, g) : {
+    id: "", title: "", subject: (S.me.subjects && S.me.subjects[0]) || SUBJECTS[0], days: [],
+    timeFrom: S.me.timeFrom || "", timeTo: S.me.timeTo || "", duration: 60, limit: 12,
+    location: S.me.location || "", open: true
+  };
+  drawGroupSheet();
+}
+function drawGroupSheet() {
+  const g = S.gedit;
+  const subs = (S.me.subjects && S.me.subjects.length ? S.me.subjects : SUBJECTS);
+  openSheet("<h2>" + esc(g.id ? T.edit : T.newGroup) + "</h2>" +
+    '<div class="field" style="margin-top:12px"><label>' + esc(T.groupTitle) + '</label><input class="input" id="g-title" value="' + esc(g.title) + '"></div>' +
+    '<div class="field" style="margin-top:12px"><label>' + esc(T.subjects) + '</label><select class="input" id="g-subject">' +
+    subs.map(s => '<option value="' + s + '"' + (g.subject === s ? " selected" : "") + ">" + esc(subName(s)) + "</option>").join("") + "</select></div>" +
+    '<div class="field" style="margin-top:12px"><label>' + esc(T.days) + '</label><div class="chips">' +
+    T.dayShort.map((d, i) => '<button class="chip ' + (g.days.includes(i) ? "on" : "") + '" data-act="g-day" data-val="' + i + '">' + esc(d) + "</button>").join("") + "</div></div>" +
+    '<div class="two" style="margin-top:12px">' +
+    '<div class="field"><label>' + esc(T.from) + '</label><input class="input" id="g-from" type="time" value="' + esc(g.timeFrom) + '"></div>' +
+    '<div class="field"><label>' + esc(T.to) + '</label><input class="input" id="g-to" type="time" value="' + esc(g.timeTo) + '"></div></div>' +
+    '<div class="field" style="margin-top:12px"><label>' + esc(T.duration) + " (" + esc(T.min) + ')</label><input class="input" id="g-dur" type="number" value="' + esc(g.duration) + '"></div>' +
+    '<div class="field" style="margin-top:12px"><label>' + esc(T.location) + '</label><input class="input" id="g-loc" value="' + esc(g.location) + '" placeholder="' + esc(T.locPh) + '"></div>' +
+    '<div class="rowline card" style="margin-top:12px"><div><b>' + esc(T.openWork) + '</b><div class="tiny muted">' + esc(T.openHint) + "</div></div>" +
+    '<button class="chip ' + (g.open ? "on" : "") + '" data-act="g-open">' + esc(g.open ? T.open : T.closed) + "</button></div>" +
+    '<div class="two" style="margin-top:16px"><button class="btn" data-act="close-sheet">' + esc(T.cancel) + "</button>" +
+    '<button class="btn primary" data-act="save-group">' + esc(T.save) + "</button></div>");
+}
+function grabGroup() {
+  const g = (id) => { const el = $("#" + id); return el ? el.value : ""; };
+  const x = S.gedit;
+  x.title = g("g-title"); x.subject = g("g-subject"); x.timeFrom = g("g-from"); x.timeTo = g("g-to");
+  x.duration = g("g-dur"); x.location = g("g-loc");
+}
+
+/* --- davomat: mentor belgilaydi --- */
+async function sheetAttendance(gId) {
+  openSheet('<div class="loader">' + esc(T.loading) + "</div>");
+  try {
+    const r = await api("/api/attendance?groupId=" + gId);
+    const date = todayStr();
+    const rec = (r.records || []).find((x) => x.date === date);
+    const marks = {};
+    (r.stats || []).forEach((s) => {
+      marks[s.studentId] = rec && rec.marks && rec.marks[s.studentId] !== undefined ? rec.marks[s.studentId] : true;
+    });
+    S.attToday = { groupId: gId, date, marks, stats: r.stats || [] };
+    drawAttendanceSheet();
+  } catch (e) { closeSheet(); toast(errText(e)); }
+}
+function drawAttendanceSheet() {
+  const a = S.attToday;
+  const rows = (a.stats.length ? a.stats : []).map((s) => {
+    const val = a.marks[s.studentId];
+    return '<div class="rowline card" style="margin-bottom:8px">' +
+      '<div style="display:flex;gap:9px;align-items:center;min-width:0">' + avatar({ name: s.name, photo: s.photo }, "sm") +
+      '<div style="min-width:0"><b style="display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(s.name) + "</b>" +
+      '<span class="tiny muted">' + s.present + "/" + s.total + " " + esc(T.totalLessons) + "</span></div></div>" +
+      '<button class="chip ' + (val ? "on" : "") + '" data-act="att-toggle" data-val="' + s.studentId + '">' +
+      (val ? "✅ " + esc(T.present) : "❌ " + esc(T.absent)) + "</button></div>";
+  }).join("") || '<p class="tiny muted">' + esc(T.noMembers) + "</p>";
+  openSheet("<h2>📋 " + esc(T.markAttendance) + "</h2>" +
+    '<p class="tiny muted" style="margin:6px 0 12px">' + esc(T.attendanceToday) + ": " + a.date + "</p>" +
+    rows +
+    '<div class="two" style="margin-top:16px">' +
+    '<button class="btn" data-act="close-sheet">' + esc(T.cancel) + "</button>" +
+    '<button class="btn primary" data-act="save-attendance">' + esc(T.save) + "</button></div>");
+}
+
+/* --- davomat: o'quvchi o'z tarixini ko'radi --- */
+async function sheetMyAttendance(gId) {
+  openSheet('<div class="loader">' + esc(T.loading) + "</div>");
+  try {
+    const r = await api("/api/attendance?groupId=" + gId);
+    const pct = r.total ? Math.round((r.present / r.total) * 100) : 0;
+    const rows = (r.records || []).map((x) =>
+      '<div class="rowline" style="padding:9px 0;border-bottom:1px solid var(--line)"><span>' + esc(x.date) + "</span>" +
+      '<span class="badge ' + (x.status === "present" ? "open" : "closed") + '">' +
+      (x.status === "present" ? "✅ " + esc(T.present) : "❌ " + esc(T.absent)) + "</span></div>"
+    ).join("") || '<p class="tiny muted">' + esc(T.noAttendanceYet) + "</p>";
+    openSheet("<h2>📊 " + esc(T.myAttendance) + "</h2>" +
+      '<div class="stat" style="margin:12px 0"><div><b>' + r.present + "</b><span>" + esc(T.present) + "</span></div>" +
+      "<div><b>" + r.absent + "</b><span>" + esc(T.absent) + "</span></div>" +
+      "<div><b>" + pct + "%</b><span>" + esc(T.attendancePct) + "</span></div></div>" +
+      rows +
+      '<button class="btn wide" style="margin-top:16px" data-act="close-sheet">' + esc(T.close) + "</button>");
+  } catch (e) { closeSheet(); toast(errText(e)); }
+}
+
+/* --- sertifikat rasmini kichraytirish --- */
+function pickCert() {
+  const inp = document.createElement("input");
+  inp.type = "file"; inp.accept = "image/*";
+  inp.onchange = async () => {
+    const f = inp.files[0]; if (!f) return;
+    try { S.edit.certs.push(await shrink(f)); grabProfile(); drawProfileSheet(); }
+    catch (e) { toast(T.error); }
+  };
+  inp.click();
+}
+function shrink(file) {
+  return new Promise((res, rej) => {
+    const fr = new FileReader();
+    fr.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const k = Math.min(1, 900 / Math.max(img.width, img.height));
+        const c = document.createElement("canvas");
+        c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+        c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+        res(c.toDataURL("image/jpeg", 0.72));
+      };
+      img.onerror = rej; img.src = fr.result;
+    };
+    fr.onerror = rej; fr.readAsDataURL(file);
+  });
+}
+
+/* ========================== HARAKATLAR ========================== */
+const ACT = {
+  back() {
+    closeSheet();
+    const h = S.history.pop();
+    go(h ? h.s : (S.me.role === "mentor" ? "groups" : "search"), h ? h.p : undefined);
+  },
+  theme() { S.theme = S.theme === "dark" ? "light" : "dark"; LS.setItem("theme", S.theme); applyTheme(); },
+  "theme-set"(v) { S.theme = v; LS.setItem("theme", v); applyTheme(); sheetSettings(); },
+  settings() { sheetSettings(); },
+  "close-sheet"() { closeSheet(); },
+  lang(v) { setLang(v); sheetSettings(); },
+  tab(v) { haptic(); go(v); },
+
+  /* ro'yxatdan o'tish */
+  "ob-role"(v) { S.ob.role = v; render(); },
+  "ob-subject"(v) {
+    const i = S.ob.subjects.indexOf(v);
+    if (i < 0) S.ob.subjects.push(v); else S.ob.subjects.splice(i, 1);
+    render();
+  },
+  "ob-back"() { if (S.ob.step > 0) { S.ob.step -= (S.ob.step === 5 && S.ob.role === "student" ? 2 : 1); render(); } },
+  async "ob-next"() {
+    const ob = S.ob, st = ob.step;
+    if (st === 1) {
+      ob.age = ($("#f-age") || {}).value || "";
+      const a = +ob.age;
+      if (!a || a < 5 || a > 99) return toast(T.required);
+    }
+    if (st === 2) { ob.name = (($("#f-name") || {}).value || "").trim(); if (ob.name.length < 3) return toast(T.required); }
+    if (st === 3) {
+      if (!ob.role) return toast(T.role);
+      if (ob.role === "mentor" && +ob.age < 18) return toast(T.mentorAgeErr);
+      if (ob.role === "student" && +ob.age > 18) return toast(T.studentAgeErr);
+    }
+    if (st === 4 && ob.role === "mentor" && !ob.subjects.length) return toast(T.atLeastOne);
+    if (st === 5) {
+      ob.phone = (($("#f-phone") || {}).value || "").trim();
+      if (ob.phone.replace(/\D/g, "").length < 7) return toast(T.required);
+      try {
+        const r = await api("/api/profile", { role: ob.role, age: +ob.age, name: ob.name,
+          phone: ob.phone, subjects: ob.subjects, lang: S.lang });
+        S.me = r.me; toast(T.saved);
+        return go(ob.role === "mentor" ? "profile" : "search");
+      } catch (e) { return toast(errText(e)); }
+    }
+    ob.step += (st === 3 && ob.role === "student" ? 2 : 1);
+    render();
+  },
+
+  /* qidiruv */
+  subject(v) { S.subject = v; go("search"); },
+  status(v) { S.status = v; go("search"); },
+  mentor(v) { S.history.push({ s: S.screen, p: S.screenParam }); go("mentor", v); },
+  write(v) { S.history.push({ s: S.screen, p: S.screenParam }); go("chat", v); },
+
+  async send() {
+    const box = $("#msg"); const text = (box.value || "").trim();
+    if (!text) return;
+    box.value = "";
+    try { await api("/api/messages", { to: S.chat.id, text }); await loadChat(S.chat.id, true); }
+    catch (e) { toast(errText(e)); }
+  },
+
+  /* AI yordamchi */
+  async "ai-send"() {
+    const box = $("#aiMsg"); const text = ((box || {}).value || "").trim();
+    if (!text || S.aiBusy) return;
+    if (box) box.value = "";
+    const history = S.aiMessages.slice(-16).map((m) => ({ role: m.role, text: m.text }));
+    S.aiMessages.push({ role: "user", text });
+    S.aiBusy = true;
+    saveAiHistory(); renderAiBody();
+    try {
+      const r = await api("/api/ai", { text, history });
+      S.aiMessages.push({ role: "model", text: r.reply });
+    } catch (e) {
+      toast(e && e.code === "ai_unavailable" ? T.aiUnavailable : errText(e));
+    } finally {
+      S.aiBusy = false;
+      saveAiHistory(); renderAiBody();
+    }
+  },
+  "ai-clear"() { S.aiMessages = []; saveAiHistory(); render(); },
+
+  /* guruh chati */
+  "group-chat"(v) { S.history.push({ s: S.screen, p: S.screenParam }); go("group-chat", v); },
+  async "gc-send"() {
+    const box = $("#gcMsg"); const text = (box ? box.value : "").trim();
+    const image = S.gcPendingImg || null;
+    if (!text && !image) return;
+    if (box) box.value = "";
+    S.gcPendingImg = null;
+    try {
+      await api("/api/group-chat/" + S.groupChatId, { text, image });
+      await loadGroupChat(S.groupChatId, true);
+    } catch (e) { toast(errText(e)); }
+  },
+  async "gc-pin"(v) {
+    try {
+      await api("/api/group-pin/" + S.groupChatId, { msgId: v });
+      await loadGroupChat(S.groupChatId, true);
+      S.groupChatPinned = (S.groupChatMessages || []).find(x => x.id === v) || null;
+      render();
+    } catch (e) { toast(errText(e)); }
+  },
+  async "gc-unpin"() {
+    try {
+      await api("/api/group-pin/" + S.groupChatId, { unpin: true });
+      S.groupChatPinned = null;
+      render();
+    } catch (e) { toast(errText(e)); }
+  },
+
+  /* guruhlar */
+  "new-group"() { sheetGroup(null); },
+  "edit-group"(v) { sheetGroup(S.groups.find(g => g.id === v)); },
+  "g-day"(v) {
+    grabGroup(); const i = +v, arr = S.gedit.days, k = arr.indexOf(i);
+    if (k < 0) arr.push(i); else arr.splice(k, 1);
+    drawGroupSheet();
+  },
+  "g-open"() { grabGroup(); S.gedit.open = !S.gedit.open; drawGroupSheet(); },
+  async "save-group"() {
+    grabGroup(); const g = S.gedit;
+    if (!g.title.trim()) return toast(T.required);
+    const body = { title: g.title, subject: g.subject, days: g.days, timeFrom: g.timeFrom,
+      timeTo: g.timeTo, duration: +g.duration, limit: +g.limit, location: g.location, open: g.open };
+    try {
+      if (g.id) await api("/api/group/update", Object.assign({ id: g.id }, body));
+      else await api("/api/groups", body);
+      closeSheet(); toast(T.saved); go("groups");
+    } catch (e) { toast(errText(e)); }
+  },
+  async "del-group"(v) {
+    if (!confirm(T.sure)) return;
+    try { await api("/api/group/update", { id: v, delete: true }); go("groups"); } catch (e) { toast(errText(e)); }
+  },
+  attendance(v) { sheetAttendance(v); },
+  "my-attendance"(v) { sheetMyAttendance(v); },
+  "att-toggle"(v) { S.attToday.marks[v] = !S.attToday.marks[v]; drawAttendanceSheet(); },
+  async "save-attendance"() {
+    const a = S.attToday;
+    try {
+      await api("/api/attendance", { groupId: a.groupId, date: a.date, marks: a.marks });
+      closeSheet(); toast(T.attendanceSaved);
+    } catch (e) { toast(errText(e)); }
+  },
+  async join(v) {
+    try { await api("/api/group/join", { id: v }); toast(T.sent); go(S.screen === "mentor" ? "mentor" : "groups", S.mentor && S.mentor.id); }
+    catch (e) { toast(errText(e)); }
+  },
+  async decide(v) {
+    const [id, yes] = v.split(":");
+    try { await api("/api/request/decide", { id, accept: yes === "1" }); await loadBadges(); go("requests"); }
+    catch (e) { toast(errText(e)); }
+  },
+
+  /* profil */
+  "edit-profile"() { sheetProfile(); },
+  "e-subject"(v) {
+    grabProfile(); const arr = S.edit.subjects, i = arr.indexOf(v);
+    if (i < 0) arr.push(v); else arr.splice(i, 1);
+    drawProfileSheet();
+  },
+  "e-day"(v) {
+    grabProfile(); const i = +v, arr = S.edit.days, k = arr.indexOf(i);
+    if (k < 0) arr.push(i); else arr.splice(k, 1);
+    drawProfileSheet();
+  },
+  "e-cert-add"() { grabProfile(); pickCert(); },
+  "e-cert-del"(v) { grabProfile(); S.edit.certs.splice(+v, 1); drawProfileSheet(); },
+  async "save-profile"() {
+    grabProfile(); const e = S.edit;
+    if (!e.name.trim()) return toast(T.required);
+    const body = { name: e.name, age: +e.age, phone: e.phone, lang: S.lang };
+    if (S.me.role === "mentor") Object.assign(body, {
+      subjects: e.subjects, bio: e.bio, experience: +e.experience, studentsNow: +e.studentsNow,
+      days: e.days, timeFrom: e.timeFrom, timeTo: e.timeTo, location: e.location, certs: e.certs
+    });
+    try { const r = await api("/api/profile", body); S.me = r.me; closeSheet(); toast(T.saved); render(); }
+    catch (err) { toast(errText(err)); }
+  },
+  async "toggle-open"() {
+    try { const r = await api("/api/profile", { open: !S.me.open }); S.me = r.me; render(); }
+    catch (e) { toast(errText(e)); }
+  },
+
+  /* admin */
+  admin() { closeSheet(); S.history.push({ s: S.screen, p: S.screenParam }); S.screen = "admin"; if (S.adminToken) loadAdmin(); else render(); },
+  async "admin-login"() {
+    const login = ($("#a-login") || {}).value || "", password = ($("#a-pass") || {}).value || "";
+    try {
+      const r = await api("/api/admin/login", { login, password });
+      S.adminToken = r.token; LS.setItem("adm", r.token); loadAdmin();
+    } catch (e) { toast(T.badCreds); }
+  },
+  "admin-out"() { S.adminToken = ""; S.adminData = null; LS.removeItem("adm"); render(); },
+  async "admin-user"(v) {
+    const [id, action] = v.split(":");
+    if (action === "delete" && !confirm(T.sure)) return;
+    try { await api("/api/admin/user", { id, action }); loadAdmin(); } catch (e) { toast(T.error); }
+  },
+  async "admin-group"(v) {
+    if (!confirm(T.sure)) return;
+    try { await api("/api/admin/group", { id: v, action: "delete" }); loadAdmin(); } catch (e) { toast(T.error); }
+  }
+};
+async function loadAdmin() {
+  try { S.adminData = await api("/api/admin/overview"); }
+  catch (e) { S.adminToken = ""; LS.removeItem("adm"); S.adminData = null; toast(T.badCreds); }
+  render();
+}
+
+/* ========================== HODISALAR ========================== */
+document.addEventListener("click", (ev) => {
+  const b = ev.target.closest("[data-act]");
+  if (!b) return;
+  const fn = ACT[b.dataset.act];
+  if (fn) { ev.preventDefault(); fn(b.dataset.val, b); }
+});
+let qTimer = null;
+document.addEventListener("input", (ev) => {
+  if (ev.target.id !== "q") return;
+  S.q = ev.target.value;
+  clearTimeout(qTimer);
+  qTimer = setTimeout(async () => {
+    await loadMentors();
+    const box = $("#view");
+    const pos = ev.target.selectionStart;
+    render();
+    const q = $("#q"); if (q) { q.focus(); try { q.setSelectionRange(pos, pos); } catch (e) {} }
+  }, 350);
+});
+document.addEventListener("keydown", (ev) => {
+  if (ev.key === "Enter" && ev.target.id === "msg") { ev.preventDefault(); ACT.send(); }
+  if (ev.key === "Enter" && ev.target.id === "gcMsg") { ev.preventDefault(); ACT["gc-send"](); }
+  if (ev.key === "Enter" && ev.target.id === "aiMsg") { ev.preventDefault(); ACT["ai-send"](); }
+});
+$("#sheetBg").addEventListener("click", (ev) => { if (ev.target.id === "sheetBg") closeSheet(); });
+
+/* ========================== ISHGA TUSHISH ========================== */
+async function boot() {
+  applyTheme();
+  try { tg.ready(); tg.expand(); if (tg.colorScheme && !LS.getItem("theme")) { S.theme = tg.colorScheme; applyTheme(); } } catch (e) {}
+  try {
+    const r = await api("/api/auth", { lang: S.lang });
+    S.me = r.me;
+    if (!LS.getItem("lang") && r.me.lang && I18N[r.me.lang]) { S.lang = r.me.lang; T = I18N[S.lang]; }
+    if (!r.registered) {
+      S.ob = { step: 0, age: "", name: S.me.tgName || "", role: "", subjects: [], phone: "" };
+      S.screen = "onboard"; render();
+    } else {
+      await go(S.me.role === "mentor" ? "groups" : "search");
+      loadBadges();
+      setInterval(loadBadges, 25000);
+    }
+  } catch (e) {
+    $("#view").innerHTML = '<div class="empty"><div class="big">⚠️</div>' + esc(T.error) +
+      '<p class="tiny" style="margin-top:8px">' + esc(e.message || "") + "</p></div>";
+  }
+}
+boot();
+</script>
+</body>
+</html>
